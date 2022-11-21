@@ -1,0 +1,32 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block content %}
+	<div class="banner">
+		<img class="image-banner-curto" src="{% static 'main/img/baner-curto.jpg' %}">
+	</div>
+	<div class="form">	
+		<div class="card destaque">	
+			{% if voltar %}
+				<a href="{% url 'usuarios:usuarios' %}" class="btn-voltar">◀</a>
+			{% endif %}
+			<div class='card-empresa'>{{ empresa }}</div>	
+			<div style="margin-top: 2rem;">
+				<form action="">
+					<div class="barra-pesquisa">
+						<input type="search" name="pesquisa" id="usuario_pesquisa" placeholder="Digite o Nome do Usuario" autocomplete="off">
+						<button type="submit">🔍</button>
+					</div>
+				</form>
+				<div class="card-top">
+					<div>Nome</div>
+					{% if usuarios %}
+						{% for usuario in usuarios %}
+							{% include 'usuarios/partials/usuario.html' %}
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+			<a href="{% url 'usuarios:usuario_cadastro' %}" class="btn-cadastro">✚ Novo usuario</a>
+		</div>						
+	</div>
+{% endblock content %}

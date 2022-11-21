@@ -1,0 +1,36 @@
+{% load static %}
+<header class="header">
+    <div class="conteudo">
+
+        <div class="conteudo1">
+            <img src="{% static 'main/img/SystemCorporation.png' %}" class="menu_hamburguer">
+
+            <h1 class="logo"><a href="{% url 'main:home' %}" class='title'>System Corporation</a></h1>
+        </div>
+        <!-- area do menu hamburguer-->
+        <span class="icon-menu" id="btn-menu">
+            <img src="{% static 'main/img/menu.png' %}" class="menu_hamburguer">
+        </span>
+        <nav class="nav" id="nav">
+            <ul class="menu">
+                
+                <li class="menu_item "><a href="{% url 'main:home' %}" class="menu_link select">Inicio</a></li>
+
+                {% if nv_acesso == 2 %}
+                    <li class="menu_item"><a href="{% url 'usuarios:usuarios' %}" class="menu_link">Usuarios</a></li>
+                    <li class="menu_item"><a href="{% url 'veiculos:veiculos' %}" class="menu_link">Veiculos</a></li>
+                {% endif %}
+
+                <li class="menu_item"><a href="{% url 'main:sobre' %}" class="menu_link">Sobre</a></li>
+
+                {% if nv_acesso != 0 %}
+                    <li class="menu_item"> <a href="{% url 'veiculos:pesquisa_avancada' %}" class="menu_link"> Pesquisa Avançada</a></li>
+                    <li class="menu_item"><a href="{% url 'main:exit' %}" class="menu_link">Sair</a></li>
+                {% else %}
+                    <li class="menu_item"><a href="{% url 'main:login' %}" class="menu_link">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+</header>

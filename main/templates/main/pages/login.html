@@ -1,0 +1,31 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+<!-- area do banner -->
+{% block content %} 
+<div class="banner">
+	<img class="image-banner-curto" src="{% static 'main/img/baner-curto.jpg' %}">
+</div>
+
+<form class="form" action="{% url 'main:login_auth' %}" method="POST">
+	{% csrf_token %}
+    <div class = "card">
+        <div class="card-top">
+            <img class= "img-login" src="{% static 'main/img/user.png' %}" alt="">
+            <h2 class="h2-login"> Acessar conta</h2>
+            <p class="p-login"> Preencha seus dados</p>
+			{% include 'main/partials/menssage.html' %}
+
+        </div>
+		{% for field in form %}
+			<div class="card-group">
+				{{ field.label}}
+				{{ field }}
+			</div>
+		{% endfor %}
+		<div class="card-group">
+			<button type="submit"> Acessar</button>	
+		</div>
+    </div>
+</form>
+{% endblock content %}

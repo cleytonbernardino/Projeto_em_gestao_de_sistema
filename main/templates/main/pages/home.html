@@ -1,0 +1,118 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block content %}
+<!-- area do banner -->
+<div class="banner">
+
+    <img class="image-banner" src="{% static 'main/img/banner.jpg' %}">
+    <div class="conteudo">
+        <h2 class="banner_titulo">A melhor empresa de softwares de rastreio 
+            <br> Para seu empreendimento
+        </h2>
+        <p class="banner_txt"> proteja seus veiculo e tenha segurança! </p>
+    </div>
+
+</div>
+
+<!-- area do conteudo abaixo do banner-->
+<main class="main">
+
+    <div class="conteudo">
+
+        <!--aqui sao as seções dentro do site-->
+        <section class="info">
+
+            <!-- aqui são os artigos -->
+            <article class="info_coluna">
+
+                <!-- imagem do artigo-->
+                <!-- este ALT ele apresenta uma infomação na tela-->
+                <img src="{% static 'main/img/protecao.jpg' %}" alt="Artigo 1" class="info_img">
+
+                <h2 class="info_titulo">Proteção</h2>
+
+                <P class="info_txt"> Proteja sua empresa e seus clientes contra furtos e roubos, com nosso sistema
+                    de rastreio</P>
+
+            </article>
+
+            <article class="info_coluna">
+
+                <img src="{% static 'main/img/seguranca.jpg' %}" alt="Artigo 1" class="info_img">
+
+                <h2 class="info_titulo">Segurança</h2>
+
+                <P class="info_txt"> Tenha segurança e saiba que essa é um empresa segura que trata todos os dados
+                    dos seus clientes com responsabilidade e segurança leia nossa politica de segurança da
+                    informação <a href="politica de segurança.html" target="_blank">PSI</a></P>
+
+            </article>
+
+            <article class="info_coluna">
+
+                <img src="{% static 'main/img/localizar.png' %}" alt="Artigo 1" class="info_img">
+
+                <h2 class="info_titulo">Localização </h2>
+
+                <P class="info_txt"> Localize e rastreei em tempo real seus veículos é só fazer <a href="login.html">login</a> e pronto </P>
+
+            </article>
+
+        </section>
+
+        <!-- aqui outra seção -->
+        <section class="cursos">
+            <h2 class="section_titulo"> Categorias</h2>
+            <div class="cursos_coluna">
+                <img src="{% static 'main/img/carro.jpg' %}" class="cursos_img">
+                <div class="cursos_descricao">
+                    <h2 class="cursos_titulo">
+                        Carros
+                    </h2>
+                    <!-- aqui tanto faz ser uma div como um paragrafo da no mesmo -->
+                    <div class="cursos_txt">
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- aqui outro topico -->
+            <div class="cursos_coluna">
+                <img src="{% static 'main/img/moto.jpg' %}" class="cursos_img">
+                <div class="cursos_descricao">
+                    <h2 class="cursos_titulo">
+                        Motos
+                    </h2>
+                    <div class="cursos_txt">
+
+                    </div>
+                </div>
+            </div>
+
+            <!--aqui outro topico-->
+            <div class="cursos_coluna">
+                <img src="{% static 'main/img/van.jpg' %}" class="cursos_img">
+                <div class="cursos_descricao">
+                    <h2 class="cursos_titulo">
+                        Vans
+                    </h2>
+                    <div class="cursos_txt">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cursos_coluna">
+
+                <img src="{% static 'main/img/caminhao.jpg' %}" class="cursos_img">
+                <div class="cursos_descricao">
+                    <h2 class="cursos_titulo">
+                        Caminhões
+                    </h2>
+                    <div class="cursos_txt">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock content %}

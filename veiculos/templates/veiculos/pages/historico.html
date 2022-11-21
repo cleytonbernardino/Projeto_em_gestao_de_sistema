@@ -1,0 +1,40 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block content %}
+<div class="banner">
+    <img class="image-banner-curto" src="{% static 'main/img/baner-curto.jpg' %}">
+</div>
+
+<div class="destaque historico-container">
+    <a href="{% url 'veiculos:veiculos' %}" class="btn-voltar">◀</a>
+    <div class="card-top">
+        <div class="historico-placa">
+            <div>Placa</div>
+            <div>UNO2L75</div>
+        </div>
+    </div>
+    <table style='width: 100%;'>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Local</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rua in historico %}
+                {% if rua %}
+                    <tr class="table-line">
+                        <td class="table-content">15/04/2022 22:40</td>
+                        <td class="table-content">{{ rua }}</td>
+                    </tr>
+                {% endif %}
+            {% empty %}
+            <tr class="table-line">
+                <td class="table-content">00/00/0000 00:00</td>
+                <td class="table-content">Não a útima localização</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

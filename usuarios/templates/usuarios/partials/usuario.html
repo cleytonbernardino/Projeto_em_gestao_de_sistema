@@ -1,0 +1,15 @@
+<div class="usuario">
+    {% if not completo %}
+        <a href="{% url 'usuarios:usuario_detalhado' usuario.id %}" class='usuario-link'>
+            <div class="usuario-nome">
+                <div>{{ usuario.nome }}</div>
+            </div>
+        </a>
+    {% else %}
+        <a href="{% url 'usuarios:usuarios' %}" class="btn-voltar">◀</a>
+        <div style='margin-bottom: 1rem;'>
+            <div>{{ usuario.nome }}</div>
+        </div>
+        <a href="#" class="btn-apagar">Apagar Usuario</a>
+    {% endif %}
+</div>

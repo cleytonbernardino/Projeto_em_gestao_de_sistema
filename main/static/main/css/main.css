@@ -1,0 +1,836 @@
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root {
+    --color-primary: #269fe6;
+    --color-primary-hover: #2086c2;
+    --color-primary-dark: #13141f;
+    --color-primary-dark-hover: #212336;
+    --color-primary-light: #d4ecfa;
+    --color-primary-light-hover: #bdd8e7;
+
+    --color-white: #fff;
+    --color-black: #000;
+
+    --color-dark-text: #444;
+    --color-info-light: #cce5ff;
+    --color-debug-light: #cce5ff;
+    --color-success-light: #d4edda;
+    --color-alert-light: #fff3cd;
+    --color-warning-light: #fff3cd;
+    --color-error-light: #f8d7da;
+
+    --color-info-dark: #4d86c4;
+    --color-debug-dark: #4d86c4;
+    --color-success-dark: #4a9c5d;
+    --color-alert-dark: #927f40;
+    --color-warning-dark: #927f40;
+    --color-error-dark: #da525d;
+
+    --color-gray-0: #f9f9f9;
+    --color-gray-1: #e0e0e0;
+    --color-gray-2: #c7c7c7;
+    --color-gray-3: #aeaeae;
+    --color-gray-4: #959595;
+    --color-gray-5: #7d7d7d;
+    --color-gray-6: #646464;
+    --color-gray-7: #4b4b4b;
+    --color-gray-8: #323232;
+    --color-gray-9: #191919;
+
+    --font-primary: sans-serif;
+    --font-headings: 'Roboto Slab', serif;
+    --font-paragraph: 'Roboto', sans-serif;
+
+    --spacing-gutter-small: 2rem;
+    --spacing-gutter-medium: 3rem;
+    --spacing-gutter-large: 4rem;
+}
+
+* {
+	/*este deixa todo o conteudo da pagina 
+	como se estivese em uma caixa, ajudando
+	na responsividade*/
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	background-color: #f0f0f0;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+
+	/* pode colocar a fonte assim tb: font-family: arial; */
+	letter-spacing: 1.5px;
+
+}
+
+h2,
+p {
+	color: white;
+}
+
+/* aqui esta pegando a imagem e nao a class,
+	pois a imagem nao vai ser utilizada em varias coisas*/
+/*este comando deixa as imagems responsivas*/
+img {
+	display: block;
+	/*largura maxima*/
+	max-width: 100%;
+}
+
+/* MESSAGES */
+.message {
+	padding: 1rem;
+	border: 1px solid var(--color-dark-text);
+	border-radius: 4px;
+	background: var(--color-gray-2);
+	color: var(--color-dark-text);
+}
+
+.message-error {
+	border: 1px solid var(--color-dark-text);
+	background: var(--color-error-light);
+	color: var(--color-error-dark);
+	border-radius: 5px;
+}
+
+.message-sucess {
+	border: 1px solid var(--color-success-dark);
+	background: var(--color-success-light);
+	color: var(--color-success-dark);
+	border-radius: 5px;
+}
+
+.message-warning {
+	border: 1px solid var(--color-warning-dark);
+	background: var(--color-warning-light);
+	color: var(--color-warning-dark);
+	border-radius: 5px;
+}
+
+.message-alert {
+	border: 1px solid var(--color-alert-dark);
+	background: var(--color-alert-light);
+	color: var(--color-alert-dark);
+	border-radius: 5px;
+}
+
+.message-info {
+	border: 1px solid var(--color-info-dark);
+	background: var(--color-info-light);
+	color: var(--color-info-dark);
+	border-radius: 5px;
+}
+
+.message-debug {
+	border: 1px solid var(--color-debug-dark);
+	background: var(--color-debug-light);
+	color: var(--color-debug-dark);
+	border-radius: 5px;
+}
+
+.map {
+	width: 100%;
+	padding-right: -50;
+}
+
+
+.info_img {
+	height: 200px;
+	width: 500px;
+}
+
+.image-banner {
+	height: 250px;
+	width: 100%;
+}
+
+.header {
+
+	height: 60px;
+	/*aqui foi deixado para deixar mais
+	 visivel a parte grafica, mais pode
+	 tirar o background*/
+}
+
+.header .conteudo {
+	display: flex;
+	justify-content: space-between;
+
+}
+
+.header .conteudo {
+	margin: 0;
+
+}
+
+.header .title {
+	text-decoration: none;
+	color: inherit;
+}
+
+.main .conteudo {
+	margin: 5px;
+	width: 99%;
+
+}
+
+.logo {
+	margin-top: 10px;
+
+}
+
+.logo,
+.icon-menu {
+	margin: 5px 10px;
+	color: blue;
+}
+
+.icon-menu {
+	display: block;
+	width: 30px;
+	height: 30px;
+	background: white;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.nav {
+	position: absolute;
+	top: 45px;
+	/*aqui o left -100% esta minimizando
+	para fazer o efeito de transicao 
+	juntamente com a classe .mostrar que
+	 esta la no js*/
+	left: -100%;
+	width: 159px;
+	transition: all 0.4s;
+
+}
+
+.menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+
+}
+
+.menu_link {
+	display: block;
+	padding: 4px;
+	background: white;
+	text-decoration: none;
+	color: black;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.menu_link:hover,
+.select {
+	background: grey;
+	color: black;
+
+}
+
+.cursos_titulo {
+	color: white;
+}
+
+/*esta classe ajuda no menu amburguer ela
+faz a alternancia para 0% juntamente com o
+javaScript*/
+.mostrar {
+	left: 0%;
+}
+
+.banner {
+	margin-top: -60px;
+	z-index: -1000;
+	position: relative;
+	margin-bottom: 20px;
+
+
+}
+
+.image-banner-curto {
+	height: 70px;
+}
+
+.conteudo1 {
+	display: flex;
+}
+
+.banner .conteudo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	color: white;
+	transform: translateX(-50%) translateY(-50%);
+	text-align: center;
+	margin-top: 20px;
+	margin-left: -20px;
+
+}
+
+.banner_txt {
+	font-size: 10px;
+
+}
+
+.banner_titulo {
+	margin-top: 100px;
+	font-size: 18px;
+	margin-bottom: 0;
+
+}
+
+
+
+.form {
+	width: 400px;
+	margin: auto;
+	margin-top: 40px;
+	margin-block-end: 40px;
+}
+
+.card {
+	box-shadow: 1px 1px 5px #ccc;
+	background-color: white;
+	border-radius: 5px;
+	padding: 30px;
+}
+
+.card-top {
+	text-align: center;
+}
+
+.img-login {
+	width: 50px;
+	border-radius: 25px;
+	display: inline;
+	box-shadow: 0px 0px 5px #ccc;
+}
+
+.card-group {
+	margin-bottom: 10px;
+}
+
+.card-group>button {
+	background-color: grey;
+	width: 100%;
+	border-radius: 30px;
+	padding: 10px;
+	color: white;
+	border: 0px;
+	outline: 0px;
+}
+
+.card-group>label {
+	width: 100%;
+	color: rgb(75, 75, 75);
+	display: block;
+}
+
+.card-group>input {
+	border-radius: 5px;
+	outline: 0;
+	width: 100%;
+	height: 30px;
+	padding: 5px;
+}
+
+.h2-login {
+	color: black;
+}
+
+.p-login {
+	color: black;
+}
+
+.h2-sobre {
+	color: black;
+	margin-left: 5px;
+}
+
+.p-sobre {
+	color: black;
+	margin-left: 30px;
+}
+
+/* estilo coluna de artigos*/
+.info_coluna {
+	background: grey;
+	color: white;
+	/*este distancia os objetos*/
+	padding: 10px;
+	margin-bottom: 0px;
+	margin-top: 20px;
+	margin-right: 7px;
+
+}
+
+
+.info_txt {
+	font-size: 13px;
+	margin-bottom: 0px;
+}
+
+
+
+.section_titulo {
+	font-size: 40px;
+	color: black;
+}
+
+/* aqui foi deixado relativo para que a 
+imagem podese ficar opaca*/
+.cursos_coluna {
+	position: relative;
+	/*esta margem esta distanciando as
+	umas das outras*/
+	margin-bottom: 30px;
+	margin-right: 7px;
+
+
+}
+
+/*este referece a parte opaca que 
+tem nas imagems*/
+/*na parte de cima foi deixada relativa
+a imagem, e aqui ira definir as proprie
+dades da opacidade*/
+.cursos_descricao {
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: white;
+	/* este esta definindo a opacidade */
+	background: rgba(0, 0, 0, 0.4);
+	width: 60%;
+	height: 100%;
+	padding: 5px;
+
+}
+
+/*area de titulo dentro da area opaca*/
+.cursos_titulo {
+	font-size: 23px;
+	margin: 5px 0;
+
+}
+
+.cursos_txt {
+	font-size: 10px;
+	color: white;
+}
+
+.cursos {
+	text-align: center;
+	font-size: 40px;
+
+}
+
+
+
+.menu_hamburguer {
+	width: 20px;
+	margin: 5px 5px;
+}
+
+
+/*este comando quer dizer que ele pega todas
+as class com icon- e coloca - as nesta formatacao,
+pra nao ficar fazendo uma por uma*/
+.social [class^=icon-] {
+	/*aqui define os blocos em linha*/
+	display: inline-block;
+	color: #333;
+	font-size: 30px;
+	text-decoration: none;
+	background: white;
+	padding: 15px;
+	/*aqui aredondou a borda em 50% */
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	line-height: 40px;
+}
+
+.footer {
+	background: black;
+	color: white;
+	padding: 10px;
+	text-align: center;
+	position: relative;
+}
+
+.footer .fale-conosco {
+	position: absolute;
+	bottom: .5rem;
+	right: 1rem;
+}
+
+
+
+/*MEDIA QUERY*/
+/*isto define estilos defirentes
+para determinados tamanhos de telas*/
+@media(min-width:480px) {
+	.logo {
+		font-size: 40px;
+	}
+
+	.image-banner-curto {
+		height: 70px;
+		width: 100%;
+	}
+
+	.icon-menu {
+		display: block;
+		width: 33px;
+		height: 33px;
+		background: white;
+		border-radius: 5px;
+		cursor: pointer;
+
+	}
+
+
+
+	.nav {
+		width: 195px;
+	}
+
+	.menu_hamburguer {
+		width: 23px;
+		margin: 5px 5px;
+	}
+
+	.banner_titulo {
+		font-size: 25px;
+		margin-top: 95px;
+	}
+
+
+	/*aqui por conta do media query o texto
+	que esta la no index em banner_txt so 
+	aparece quando 
+	chegar no tamanho definido pela midia 
+	query*/
+	.banner_txt {
+		font-size: 14px;
+		margin: 0;
+		margin-top: 10px;
+	}
+
+	/*este deixou as tres imagems uma do lado 
+	da outra com espacos*/
+	/*isto so ira acontecer quando ele estiver 
+	na resolucao definida pelo media querry*/
+	.info,
+	.cursos {
+		display: flex;
+		justify-content: space-between;
+		margin-top: -55px;
+	}
+
+
+
+	.info_coluna {
+		width: 32%;
+	}
+
+	.info_img {
+		height: 140px;
+	}
+
+	.info_titulo {
+		font-size: 30px;
+		margin: 5px 0;
+	}
+
+	.info_txt {
+		font-size: 17px;
+	}
+
+	.section_titulo {
+		width: 100%;
+		font-size: 45px;
+
+	}
+
+	.cursos {
+		/*deixa os objetos um do lado do outro*/
+		flex-wrap: wrap;
+		margin-top: 0;
+	}
+
+	.cursos_coluna {
+		width: 48%;
+
+	}
+
+	/* rodapé*/
+	.footer .social[class^="icon-"] {
+		margin: 0 10px;
+	}
+
+}
+
+@media(min-width:768px) {
+	.image-banner {
+		height: 350px;
+	}
+
+
+
+	.info_img {
+		height: 230px;
+	}
+
+	.logo {
+		font-size: 45px;
+	}
+
+	.image-banner-curto {
+		height: 70px;
+		width: 100%;
+	}
+
+	.menu_hamburguer {
+		width: 25px;
+		margin: 5px 5px;
+	}
+
+	.icon-menu {
+		display: block;
+		width: 35px;
+		height: 35px;
+		background: white;
+		border-radius: 5px;
+		cursor: pointer;
+
+	}
+
+	.nav {
+		margin-top: 15px;
+		width: 217px;
+	}
+
+	.menu_link {
+		padding: 17px;
+		font-size: 12px;
+	}
+
+	.banner_titulo {
+		font-size: 30px;
+		margin-top: 95px;
+
+	}
+
+	.banner_txt {
+		font-size: 17px;
+		margin-right: 30px;
+
+	}
+
+
+
+	.cursos_titulo {
+		font-size: 45px;
+	}
+
+	.cursos_txt {
+		font-size: 17px;
+	}
+}
+
+@media(min-width:1024px) {
+
+	.cursos_img {
+		width: 700px;
+
+	}
+
+	.menu_link {
+		color: white;
+	}
+
+
+	.image-banner-curto {
+		height: 70px;
+		width: 100%;
+	}
+
+	.image-banner {
+		height: 400px;
+	}
+
+	.conteudo {
+		width: 1000px;
+	}
+
+	.section_titulo {
+		font-size: 40px;
+		margin: 30px 0;
+	}
+
+	.nav {
+		/*este deixa a posição estatica*/
+		position: static;
+		width: auto;
+		margin-top: -7px;
+
+	}
+
+	.menu {
+		display: flex;
+	}
+
+	/*este retira o menu hamburguer*/
+	.icon-menu {
+		display: none;
+	}
+
+	.menu_link {
+		/*este tira a cor do menu*/
+		background: none;
+		font-size: 20px;
+	}
+
+	/* elinina a cor vermelha do cabecario*/
+	.header {
+		background: none;
+	}
+
+	.select {
+		color: white;
+
+	}
+
+	.banner_titulo {
+		font-size: 35px;
+	}
+
+	.banner-txt {
+		font-size: 25px;
+	}
+
+	.info {
+		margin-top: -50px;
+	}
+
+	.info_coluna {
+		padding: 10px;
+	}
+
+	.info_titulo {
+		font-size: 30px;
+		text-align: center;
+
+	}
+
+	.info_txt {
+		font-size: 15px;
+	}
+
+
+
+	.cursos_titulo {
+		font-size: 30px;
+	}
+
+	.cursos_txt {
+		font-size: 15px;
+	}
+
+	@media(min-width:1280px) {
+		.conteudo {
+			width: 1200px;
+
+		}
+
+
+
+		.image-banner-curto {
+			height: 70px;
+			width: 100%;
+		}
+
+
+		.image-banner {
+			height: 500px;
+		}
+
+		.banner_titulo {
+			margin-top: 200px;
+		}
+
+		.banner .conteudo {
+			top: 40%;
+		}
+
+		.info {
+			margin-top: -35px;
+		}
+
+		.banner_titulo {
+			margin-right: 450px;
+			font-size: 40px;
+
+		}
+
+		.banner_txt {
+			margin-right: 450px;
+			font-size: 17px;
+
+		}
+
+		.section_titulo {
+			font-size: 50px;
+
+
+		}
+
+		.info_img {
+			height: 300px;
+		}
+
+		.logo {
+			font-size: 50px;
+		}
+
+		.menu_link {
+			font-size: 21px;
+		}
+
+		.menu {
+			margin-right: -50px;
+
+		}
+
+		.cursos {
+			margin-left: 12px;
+		}
+
+		.footer .conteudo {
+			margin-left: 65px;
+		}
+
+
+
+	}
+
+}

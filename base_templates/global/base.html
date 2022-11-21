@@ -1,0 +1,12 @@
+{% load static %}
+<html>
+    <head>
+        {% include 'main/partials/head.html' %}
+    </head>
+    <body>
+        {% include 'main/partials/search_bar.html' %}
+        {% block content %}{% endblock content %}
+        {% include 'main/partials/footer.html' %}
+    </body>
+</html>
+{% block script %}{% endblock script %}
