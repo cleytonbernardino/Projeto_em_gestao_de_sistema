@@ -15,7 +15,7 @@ urlpatterns = [
     path('pegar-cordenadas/save', views.salvar_cordenadas,
          name='salvar_cordenadas'),
     path('historico/<str:placa>/', views.historico, name='historico'),
-    path('pesquisa/avancado/', views.pesquisa_avancada, name='pesquisa_avancada'),  # noqa: E501
+    path('pesquisa/', views.pesquisa, name='pesquisa'),  # noqa: E501
     path('completo/<int:id>/', views.veiculo_completo, name='veiculo_completo'),  # noqa: E501
 ]
 

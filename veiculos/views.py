@@ -1,6 +1,3 @@
-from os import environ
-from urllib.request import urlretrieve
-
 from django.contrib import messages
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import redirect, render
@@ -8,6 +5,7 @@ from geopandas.tools import reverse_geocode
 from geopy.exc import GeocoderTimedOut
 from shapely.geometry import Point
 
+from . import views_utilities as ult
 from .forms import PlacaForm, VeiculoForm
 from .models import Veiculo, VeiculoHistorico
 
@@ -150,22 +148,7 @@ def historico(request, placa: str):
     })
 
 
-def gerar_mapa(latitude: float, longitude: float):
-    url_confg = {
-        'api_key': environ.get('api_key'),
-        'latitude': latitude,
-        'longitude': longitude,
-    }
-    URL = (
-        "https://maps.googleapis.com/maps/api/staticmap?"
-        f"center={url_confg['latitude']},{url_confg['longitude']}"
-        f"&markers={url_confg['latitude']},{url_confg['longitude']}"
-        f"&zoom=17&size=1000x480&scale=2&key={url_confg['api_key']}"
-    )
-    # urlretrieve(URL, 'media/main/mapa/mapa.jpg')
-
-
-def pesquisa_avancada(request):
+def pesquisa(request):
     nv_acesso = request.session.get('nv_acesso', 0)
     if nv_acesso == 0:
         messages.error(
@@ -174,21 +157,11 @@ def pesquisa_avancada(request):
 
     pesquisa = None
     end = 'Não Disponivel'
-    if request.GET:
-        # request.GET['placa']
-        try:
-            pesquisa = Veiculo.objects.get(
-                empresa_id=request.session['empresa']['id'],
-                placa='UNO2L75',
-            )
-            historico = VeiculoHistorico.objects.filter(
-                veiculo=pesquisa
-            ).order_by('-pk')[0]
-            end = reverse_geocode(
-                Point(float(historico.latitude), float(historico.longitude))).address[0]
-            gerar_mapa(float(historico.latitude), float(historico.longitude))
-        except Veiculo.DoesNotExist:
-            pass
+    placa = request.GET.get('placa', None)
+    if placa != None:
+        ult.buscar_veiculo()
+        ult.gerar_mapa(float(historico.latitude),
+                        float(historico.longitude))
 
     return render(request, 'veiculos/pages/pesquisa_avancada.html', context={
         'forms': PlacaForm(),

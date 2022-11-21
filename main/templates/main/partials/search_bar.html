@@ -24,7 +24,7 @@
                 <li class="menu_item"><a href="{% url 'main:sobre' %}" class="menu_link">Sobre</a></li>
 
                 {% if nv_acesso != 0 %}
-                    <li class="menu_item"> <a href="{% url 'veiculos:pesquisa_avancada' %}" class="menu_link"> Pesquisa Avançada</a></li>
+                    <li class="menu_item"> <a href="{% url 'veiculos:pesquisa' %}" class="menu_link"> Pesquisa Avançada</a></li>
                     <li class="menu_item"><a href="{% url 'main:exit' %}" class="menu_link">Sair</a></li>
                 {% else %}
                     <li class="menu_item"><a href="{% url 'main:login' %}" class="menu_link">Login</a></li>

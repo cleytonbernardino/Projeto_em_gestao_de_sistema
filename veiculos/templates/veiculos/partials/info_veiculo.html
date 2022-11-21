@@ -1,9 +1,5 @@
 <div class="info-car-container">
     <div class="info-car-content">
-      <div class="item-veiculo">
-         <div class="item-titulo">Empresa</div>
-         <div class="item-texto">{{ resultado.empresa }}</div>
-      </div>
         <img src="{{ resultado.foto_carro.url }}">
         <div class="item-veiculo">
          <div class="item-titulo">Modelo</div>
@@ -24,7 +20,7 @@
          </div>
          <div class="item-veiculo">
             <div class="item-titulo">Última Localização</div>
-            <div class="item-texto">{{ localizacao }}</div>
+            <div class="item-texto">{{ resultado.localizacao }}</div>
          </div>
             <a href="{% url 'veiculos:pesquisa_avancada' %}" class="btn-limpar">limpar</a>
     </div>

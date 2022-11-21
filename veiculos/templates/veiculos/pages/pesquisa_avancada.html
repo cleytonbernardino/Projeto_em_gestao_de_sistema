@@ -15,10 +15,11 @@
     <div class="card destaque mapa-content">  
         <img src="/media/main/mapa/mapa.jpg" alt="Imagem do mapa" class="map">
     </div>
-    <div>
-        {% if resultado %}
-            {% include 'veiculos/partials/info_veiculo.html' %}
-        {% endif %}
+    <div style='position: relative; overflow-x: clip;'>
+        <div class="empresa-nome">
+            <span>Mirage Seguros</span>
+        </div>
+        {% include 'veiculos/partials/info_veiculo.html' %}
     </div>
     </div>
 </div>
