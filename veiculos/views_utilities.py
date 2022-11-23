@@ -1,8 +1,9 @@
 from os import environ
 
 # from urllib.request import urlretrieve
-# from geopandas.tools import reverse_geocode
+from geopandas.tools import reverse_geocode
 from geopy.exc import GeocoderTimedOut
+from shapely.geometry import Point
 
 from .models import Veiculo, VeiculoHistorico
 
@@ -13,7 +14,7 @@ def gerar_mapa(latitude: float, longitude: float):
         'latitude': latitude,
         'longitude': longitude,
     }
-    URL = (
+    URL = (  # noqa: F841
         "https://maps.googleapis.com/maps/api/staticmap?"
         f"center={url_confg['latitude']},{url_confg['longitude']}"
         f"&markers={url_confg['latitude']},{url_confg['longitude']}"
@@ -22,32 +23,43 @@ def gerar_mapa(latitude: float, longitude: float):
     # urlretrieve(URL, 'media/main/mapa/mapa.jpg')
 
 
-def buscar_veiculo(empresa_id: int, placa: str = ''):
-    pesquisa = None
+def get_vehicle(business_id: int, license_plate: str = ''):
     try:
-        pesquisa = Veiculo.objects.get(
-            empresa_id=empresa_id,
-            placa='UNO2L75',
+        return Veiculo.objects.get(
+            empresa_id=business_id,
+            placa=license_plate
         )
-        historico = VeiculoHistorico.objects.filter(
-            veiculo=pesquisa
-        ).order_by('-pk')[0]
-        tentativa = 0
-        while tentativa < 3:
-            try:
-                # endereco = reverse_geocode(
-                # Point(float(historico.latitude), float(historico.longitude))).address[0] #noqa: E501
-                endereco = 'Nada por enquanto'
-                break
-            except GeocoderTimedOut:
-                tentativa += 1
     except Veiculo.DoesNotExist:
-        pesquisa = {
+        return {
+            'foto_carro': {
+                'url': '/media/main/mapa/logo.png',
+            },
             'modelo': 'Desconhecido',
             'proprietario': 'Desconhecido(a)',
             'pais': 'Desconhecido',
-            'placa': placa if placa != '' else 'Desconhecido',
+            'placa': license_plate if license_plate != '' else 'Desconhecida',
             'num_chassi': 'Desconhecido',
-            'localizacao': 'Desconhecida'
         }
-    return pesquisa
+
+
+def get_historic(vehicle: Veiculo):
+    if type(vehicle) != Veiculo:
+        raise ValueError()
+
+    historic = VeiculoHistorico.objects.filter(
+        veiculo=vehicle
+    ).order_by('-pk')
+    return historic if historic else None
+
+
+def get_address(latitude: float, longitude: float):
+    if type(latitude) != float or type(longitude) != float:
+        raise ValueError()
+
+    try:
+        address = reverse_geocode(Point(latitude, longitude))
+        return ''.join(address.address[0].split(',')[0])
+    except GeocoderTimedOut:
+        return 'Tempo Expirado'
+    except AttributeError:
+        return 'Não foi possível encontrar essa cordernada'

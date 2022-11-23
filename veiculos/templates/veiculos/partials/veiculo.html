@@ -1,6 +1,6 @@
 <div class="usuario">
     {% if not completo %}
-        <a href="{% url 'veiculos:veiculo_completo' veiculo.id %}" class='usuario-link'>
+        <a href="{% url 'veiculos:complete_vehicle' veiculo.id %}" class='usuario-link'>
             <div class="usuario-nome">
                 <div>{{ veiculo.placa }}</div>
             </div>
@@ -19,6 +19,10 @@
             <div style="border-top: 0.1rem solid #357CFF;">{{ veiculo.modelo }}</div>
         </div>
         <div style='margin-bottom: 1rem;'>
+            <div>Cor</div>
+            <div style="border-top: 0.1rem solid #357CFF;">{{ veiculo.cor }}</div>
+        </div>
+        <div style='margin-bottom: 1rem;'>
             <div>Pais</div>
             <div style="border-top: 0.1rem solid #357CFF;">{{ veiculo.pais }}</div>
         </div>
@@ -30,7 +34,7 @@
             <div>Numero do Chassi</div>
             <div style="border-top: 0.1rem solid #357CFF;">{{ veiculo.num_chassi }}</div>
         </div>
-        <a href="{% url 'veiculos:historico' veiculo.placa %}">Mostra Historico</a>
+        <a href="{% url 'veiculos:historico' veiculo.placa %}" class="btn-historico">Mostra Historico</a>
         <a href="#" class="btn-apagar">Apagar Veiculo</a>
     {% endif %}
 </div>

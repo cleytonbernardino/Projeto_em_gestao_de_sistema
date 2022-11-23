@@ -52,13 +52,13 @@
 	como se estivese em uma caixa, ajudando
 	na responsividade*/
 	box-sizing: border-box;
+	text-decoration: none;
 }
 
 body {
 	font-family: 'Open Sans', sans-serif;
 	margin: 0;
 	background-color: #f0f0f0;
-
 }
 
 h1,
@@ -480,6 +480,7 @@ pra nao ficar fazendo uma por uma*/
 	position: absolute;
 	bottom: .5rem;
 	right: 1rem;
+	color: white;
 }
 
 

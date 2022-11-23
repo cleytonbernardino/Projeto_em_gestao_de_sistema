@@ -170,12 +170,29 @@
     color: red;
     border: 0.1rem solid red;
     border-radius: 0.5rem;
-    padding: 0 4rem;
+    padding: 0.2rem 4rem;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
 }
 
 .btn-apagar:hover {
     background: red;
     color: white;
+}
+
+.btn-historico {
+    display: block;
+    width: 15rem;
+    margin: 0.5rem auto;
+    border: 0.1rem solid dodgerblue;
+    border-radius: 0.5rem;
+    color: dodgerblue;
+    transition: all 300ms ease-in-out;
+}
+
+.btn-historico:hover {
+    color: white;
+    background: dodgerblue;
 }
 
 .usuario-link {

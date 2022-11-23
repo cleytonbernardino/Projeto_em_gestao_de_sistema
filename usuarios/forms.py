@@ -7,7 +7,7 @@ class UserRegisterForm(forms.Form):
         label='Nome Completo',
         widget=forms.TextInput(attrs={
             'placeholder': 'Nome completo do funcionario',
-            'autocomplete': 'off',
+            'autocomplete': 'false',
         }),
         error_messages={
             'required': 'O nome completo é obrigatorio',
@@ -18,7 +18,7 @@ class UserRegisterForm(forms.Form):
         label='Email',
         widget=forms.TextInput(attrs={
             'placeholder': 'Digite seu email',
-            'autocomplete': 'off',
+            'autocomplete': 'false',
         }),
         error_messages={
             'required': 'Por favor insira sua email',

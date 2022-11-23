@@ -1,27 +1,27 @@
 <div class="info-car-container">
     <div class="info-car-content">
-        <img src="{{ resultado.foto_carro.url }}">
+        <img src="{{ vehicle.foto_carro.url }}">
         <div class="item-veiculo">
          <div class="item-titulo">Modelo</div>
-         <div class="item-texto">{{ resultado.modelo }}</div>
+         <div class="item-texto">{{ vehicle.modelo }}</div>
       </div>
          <div class="item-veiculo">
             <div class="item-titulo">Proprietario</div>
-            <div class="item-texto">{{ resultado.proprietario}}</div>
+            <div class="item-texto">{{ vehicle.proprietario}}</div>
          </div>
          <div class="item-veiculo">
             <div class="item-titulo">Pais/Placa</div>
-            <div class="item-texto">{{ resultado.pais }}</div>
-            <div class="item-texto">{{ resultado.placa }}</div>
+            <div class="item-texto">{{ vehicle.pais }}</div>
+            <div class="item-texto">{{ vehicle.placa }}</div>
          </div>
          <div class="item-veiculo">
             <div class="item-titulo">Numero do Chassi</div>
-            <div class="item-texto">{{ resultado.num_chassi }}</div>
+            <div class="item-texto">{{ vehicle.num_chassi }}</div>
          </div>
          <div class="item-veiculo">
             <div class="item-titulo">Última Localização</div>
-            <div class="item-texto">{{ resultado.localizacao }}</div>
+            <div class="item-texto">{{ street }}</div>
          </div>
-            <a href="{% url 'veiculos:pesquisa_avancada' %}" class="btn-limpar">limpar</a>
+            <a href="{% url 'veiculos:search' %}" class="btn-limpar">limpar</a>
     </div>
 </div>

@@ -11,4 +11,5 @@ urlpatterns = [
          name='usuarios_cadastro_auth'),
     path('cadastro/detalhado/<int:id>/',
          views.usuario_detalhado, name='usuario_detalhado'),
+    path('cadastro/detalhado/delete/', views.delete_user, name='delete'),
 ]

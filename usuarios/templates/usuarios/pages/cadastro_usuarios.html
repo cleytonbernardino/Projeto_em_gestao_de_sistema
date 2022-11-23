@@ -5,7 +5,7 @@
 		<img class="image-banner-curto" src="{% static 'main/img/baner-curto.jpg' %}">
 	</div>
 
-	<form class="form" action="{% url 'usuarios:usuarios_cadastro_auth' %}" method="POST">
+	<form autocomplete="off" class="form" action="{% url 'usuarios:usuarios_cadastro_auth' %}" method="POST">
 		{% csrf_token %}
 		<div class = "card destaque">
 			<div class="card-top">

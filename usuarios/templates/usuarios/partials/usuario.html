@@ -10,6 +10,9 @@
         <div style='margin-bottom: 1rem;'>
             <div>{{ usuario.nome }}</div>
         </div>
-        <a href="#" class="btn-apagar">Apagar Usuario</a>
+        <form action="{% url 'usuarios:delete' %}" method="POST">
+            {% csrf_token %}
+            <button class="btn-apagar" type="submit">Apagar Usuario</button>
+        </form>
     {% endif %}
 </div>

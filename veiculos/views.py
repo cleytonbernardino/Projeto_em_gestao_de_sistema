@@ -1,12 +1,11 @@
+# from urllib.request import urlretrieve
+
 from django.contrib import messages
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import redirect, render
-from geopandas.tools import reverse_geocode
-from geopy.exc import GeocoderTimedOut
-from shapely.geometry import Point
 
 from . import views_utilities as ult
-from .forms import PlacaForm, VeiculoForm
+from .forms import VeiculoForm
 from .models import Veiculo, VeiculoHistorico
 
 """
@@ -24,8 +23,9 @@ def veiculos(request):
     pesquisa = request.GET.get('pesquisa', None)
     veiculos = Veiculo.objects.filter(empresa_id=empresa['id'])
     if pesquisa:
-        veiculos = Veiculo.objects.get(
-            empresa_id=empresa['id'], placa=pesquisa)
+        veiculos = Veiculo.objects.filter(
+            empresa_id=empresa['id'],
+            placa__startswith=pesquisa.upper())
 
     return render(request, 'veiculos/pages/veiculos.html', context={
         'empresa': empresa['nome'],
@@ -34,37 +34,37 @@ def veiculos(request):
     })
 
 
-def veiculo_completo(request, id):
-    nv_acesso = request.session.get('nv_acesso', 0)
-    if nv_acesso == 0:
+def complete_vehicle(request, id):
+    access_level = request.session.get('nv_acesso', 0)
+    if access_level == 0:
         messages.error(request, 'Você deve está logado para poder fazer isso')
         return redirect('main:login')
 
-    empresa = request.session.get('empresa', {'nome': 'erro', 'id': 0})
-    veiculo = Veiculo.objects.get(empresa_id=empresa['id'], pk=id)
-    return render(request, 'veiculos/pages/veiculo_completo.html', context={
-        'empresa': empresa['nome'],
-        'nv_acesso': nv_acesso,
-        'veiculo': veiculo,
+    business = request.session.get('empresa', {'nome': 'erro', 'id': 0})
+    vehicle = Veiculo.objects.get(empresa_id=business['id'], pk=id)
+    return render(request, 'veiculos/pages/complete_vehicle.html', context={
+        'empresa': business['nome'],
+        'nv_acesso': access_level,
+        'veiculo': vehicle,
         'completo': True,
     })
 
 
-def veiculo_cadastro(request):
-    nv_acesso = request.session.get('nv_acesso', 0)
-    if nv_acesso != 2:
+def vehicle_registration(request):
+    access_level = request.session.get('nv_acesso', 0)
+    if access_level != 2:
         return HttpResponseForbidden()
 
     veiculo_form_data = request.POST.get('veiculo_form_data', None)
-    empresa = request.session.get('empresa', {'nome': 'erro', 'id': 0})
+    business = request.session.get('business', {'nome': 'erro', 'id': 0})
     return render(request, 'veiculos/pages/cadastro_veiculos.html', context={
-        'nv_acesso': nv_acesso,
-        'empresa': empresa['nome'],
+        'nv_acesso': access_level,
+        'empresa': business['nome'],
         'forms': VeiculoForm(veiculo_form_data),
     })
 
 
-def veiculo_cadastro_auth(request):
+def registration_vehicle_auth(request):
     POST = request.POST
     if not POST:
         raise Http404
@@ -108,64 +108,66 @@ def salvar_cordenadas(request):
     return redirect('veiculos:pegar_cordenadas')
 
 
-def historico(request, placa: str):
-    nv_acesso = request.session.get('nv_acesso', 0)
-    if nv_acesso == 0:
+def historic(request, license_plate: str):
+    access_level = request.session.get('nv_acesso', 0)
+    if access_level == 0:
         raise HttpResponseForbidden()
 
-    empresa = request.session.get('empresa', {'nome': 'erro', 'id': 0})
-    usadas = []
-    historico = []
-    try:
-        veiculo = Veiculo.objects.get(empresa_id=empresa['id'], placa=placa)
-        cordenadas = VeiculoHistorico.objects.filter(
-            veiculo=veiculo).order_by('-pk')
+    business = request.session.get('empresa', {'nome': 'erro', 'id': 0})
+    used = []
+    streets = {}
 
-        for cordenada in cordenadas:
-            tentativa = 0
-            latitude = cordenada.latitude
-            longitude = cordenada.longitude
-            if latitude and longitude in usadas:
-                continue
-            point = Point(float(latitude),
-                          float(longitude))
-            try:
-                endereco = reverse_geocode(point).address[0]
-            except GeocoderTimedOut:
-                if tentativa == 3:
-                    historico = ['Não foi possivel localizar o historico, tente novamente mais tarde']  # noqa: E501
-                    break
-                tentativa += 1
-            usadas.append(latitude)
-            usadas.append(longitude)
-            historico.append(endereco)
-    except Veiculo.DoesNotExist:
-        historico.append('Este Veículo não existe')
+    vehicle = ult.get_vehicle(business['id'], license_plate)
+    if type(vehicle) != Veiculo:
+        raise Http404
 
-    return render(request, 'veiculos/pages/historico.html', context={
-        'nv_acesso': nv_acesso,
-        'historico': historico,
+    historic = ult.get_historic(vehicle)
+    if historic is None:
+        streets['00/00/0000 00:00'] = 'Esse Veículo não possui Histórico ainda'
+    else:
+        for i in historic:
+            lati = float(i.latitude)
+            long = float(i.longitude)
+            if long not in used:
+                time = i.horario
+                formated_time = f'{time.day}/{time.month}/{time.year}  {time.hour}:{time.minute}'  # noqa: E501
+                streets[f'{formated_time}'] = ult.get_address(lati, long)
+                used.append(long)
+
+    return render(request, 'veiculos/pages/historic.html', context={
+        'nv_acesso': access_level,
+        'streets': streets,
+        'license_plate': vehicle.placa,
     })
 
 
-def pesquisa(request):
-    nv_acesso = request.session.get('nv_acesso', 0)
-    if nv_acesso == 0:
+def search(request):
+    access_level = request.session.get('nv_acesso', 0)
+    if access_level == 0:
         messages.error(
             request, 'Você deve Estar logado para poder fazer isso.')
         return redirect("main:login")
 
-    pesquisa = None
-    end = 'Não Disponivel'
-    placa = request.GET.get('placa', None)
-    if placa != None:
-        ult.buscar_veiculo()
-        ult.gerar_mapa(float(historico.latitude),
-                        float(historico.longitude))
+    historic = None
+    street = 'Desconhecido'
+    business = request.session.get('empresa', {'nome': 'erro', 'id': 0})
+    placa = request.GET.get('placa', '')
+    vehicle = ult.get_vehicle(business['id'], placa)
 
-    return render(request, 'veiculos/pages/pesquisa_avancada.html', context={
-        'forms': PlacaForm(),
-        'resultado': pesquisa,
-        'localizacao': end.split(',')[0],
-        'nv_acesso': nv_acesso,
+    if type(vehicle) == Veiculo:
+        try:
+            historic = ult.get_historic(vehicle)
+            lati = float(historic[0].latitude)
+            long = float(historic[0].longitude)
+            ult.gerar_mapa(lati, long)
+            street = ult.get_address(lati, long)
+        except IndexError:
+            street = 'Esse veículo não possuí historico de localização'
+            # ADICIONAR DEPOIS UM SISTEMA DE TROCA DE MAPA
+
+    return render(request, 'veiculos/pages/search.html', context={
+        'vehicle': vehicle,
+        'street': street,
+        'empresa': business['nome'],
+        'nv_acesso': access_level,
     })

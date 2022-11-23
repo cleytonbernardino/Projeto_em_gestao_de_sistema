@@ -1,20 +1,6 @@
 from django import forms
 
 
-class PlacaForm(forms.Form):
-    placa = forms.CharField(
-        label='Placa',
-        widget=forms.TextInput(attrs={
-            'class': 'input-placa',
-            'placeholder': 'Digite a placa sem traço',
-            'autocomplete': 'off',
-        }),
-        error_messages={
-            'required': 'Digite uma placa Primeiro'
-        },
-    )
-
-
 class VeiculoForm(forms.Form):
     proprietario = forms.CharField(
         label='Nome do Proprietario',

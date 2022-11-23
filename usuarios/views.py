@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import redirect, render
-from main.models import Empresa, User
 
+from main.models import Empresa, User
 from usuarios.forms import UserRegisterForm
 
 
@@ -81,3 +81,19 @@ def usuario_cadastro_auth(request):
     else:
         messages.error(request, 'Erro ao cadastrar o usuario')
     return redirect('usuarios:usuario_cadastro')
+
+
+def delete_user(request):
+    if not request.POST:
+        raise HttpResponseForbidden()
+
+    email = request.POST.get('email', None)
+    business = request.session.get('empresa', {'nome': 'erro', 'id': 0})
+    if email is None:
+        return redirect('usuarios:usuarios')  # Colocar uma message falando que não pode ser excluido # noqa: E501
+
+    User.objects.delete(
+        empresa_id=business['id'],
+        email=email
+    )
+    return redirect('usuarios:usuarios')
