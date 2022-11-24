@@ -1,6 +1,6 @@
 <div class="usuario">
     {% if not completo %}
-        <a href="{% url 'usuarios:usuario_detalhado' usuario.id %}" class='usuario-link'>
+        <a href="{% url 'usuarios:detailed_user' usuario.id %}" class='usuario-link'>
             <div class="usuario-nome">
                 <div>{{ usuario.nome }}</div>
             </div>
@@ -10,9 +10,10 @@
         <div style='margin-bottom: 1rem;'>
             <div>{{ usuario.nome }}</div>
         </div>
-        <form action="{% url 'usuarios:delete' %}" method="POST">
+
+        <form action="{% url 'usuarios:delete' usuario.id %}" method="POST">
             {% csrf_token %}
-            <button class="btn-apagar" type="submit">Apagar Usuario</button>
+            <input class="btn-apagar" type="submit" value="Apagar Usuario">
         </form>
     {% endif %}
 </div>

@@ -11,6 +11,7 @@
 			{% endif %}
 			<div class='card-empresa'>{{ empresa }}</div>	
 			<div style="margin-top: 2rem;">
+				{% include 'main/partials/menssage.html' %}
 				<form action="">
 					<div class="barra-pesquisa">
 						<input type="search" name="pesquisa" id="usuario_pesquisa" placeholder="Digite a placa do veiculo" autocomplete="off">
@@ -21,7 +22,7 @@
 					<div>Placa</div>
 					{% if veiculos %}
 						{% for veiculo in veiculos %}
-							{% include 'veiculos/partials/veiculo.html' %}
+							{% include 'veiculos/partials/vehicle.html' %}
 						{% endfor %}
 					{% endif %}
 				</div>

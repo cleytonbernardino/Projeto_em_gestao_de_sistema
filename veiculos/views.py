@@ -27,21 +27,24 @@ def veiculos(request):
             empresa_id=empresa['id'],
             placa__startswith=pesquisa.upper())
 
-    return render(request, 'veiculos/pages/veiculos.html', context={
+    return render(request, 'veiculos/pages/vehicles.html', context={
         'empresa': empresa['nome'],
         'nv_acesso': nv_acesso,
         'veiculos': veiculos,
     })
 
 
-def complete_vehicle(request, id):
+def complete_vehicle(request, license_plate: str):
     access_level = request.session.get('nv_acesso', 0)
     if access_level == 0:
         messages.error(request, 'Você deve está logado para poder fazer isso')
         return redirect('main:login')
 
     business = request.session.get('empresa', {'nome': 'erro', 'id': 0})
-    vehicle = Veiculo.objects.get(empresa_id=business['id'], pk=id)
+    vehicle = ult.get_vehicle(business['id'], license_plate)
+    if type(vehicle) != Veiculo:
+        raise Http404
+
     return render(request, 'veiculos/pages/complete_vehicle.html', context={
         'empresa': business['nome'],
         'nv_acesso': access_level,
@@ -86,6 +89,57 @@ def registration_vehicle_auth(request):
         return redirect('veiculos:veiculo_cadastro')
     messages.info(request, 'Não foi possivel cadastrar esse veículo')
     return redirect('veiculos:veiculo_cadastro')
+
+
+def edit_vehicle(request, license_plate: str):
+    access_level = request.session.get('nv_acesso', 0)
+    if access_level != 2:
+        raise HttpResponseForbidden()
+
+    business = request.session.get('empresa', {'nome': 'erro', 'id': 0})
+    vehicle = ult.get_vehicle(business['id'], license_plate)
+
+    if type(vehicle) != Veiculo:
+        return Http404
+
+    return render(request, 'veiculos/pages/edit_vehicle.html', {
+        'nv_acesso': access_level,
+        'business': business['nome'],
+        'vehicle': vehicle
+    })
+
+
+def edit_vehicle_auth(request, license_plate: str):
+    POST = request.POST
+    if not POST:
+        raise HttpResponseForbidden()
+
+    business = request.session.get('business', {'nome': 'erro', 'id': 0})
+    vehicle = ult.get_vehicle(business['id'], license_plate)
+    if vehicle is None:
+        return Http404
+
+    vehicle.proprietario = POST["proprietario"]
+    vehicle.modelo = POST["modelo"]
+    vehicle.cor = POST["cor"]
+    vehicle.placa = POST["placa"]
+    if request.FILES:
+        vehicle.foto_carro = request.FILES["foto"]
+
+
+def delete_vehicle(request, license_plate: str):
+    if not request.POST:
+        raise Http404
+
+    business = request.session.get('empresa', {'nome': 'erro', 'id': 0})
+    try:
+        vehicle = ult.get_vehicle(business['id'], license_plate)
+        vehicle.delete()
+        messages.success(request, 'Veículo apagado com sucesso')
+    except Veiculo.DoesNotExist:
+        messages.error(request, 'Não foi possível apagar esse veículo')
+
+    return redirect('veiculos:veiculos')
 
 
 def pegar_cordenadas(request):
