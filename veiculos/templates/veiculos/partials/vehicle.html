@@ -1,3 +1,4 @@
+{% load static %}
 <div class="usuario">
     {% if not completo %}
         <a href="{% url 'veiculos:complete_vehicle' veiculo.id %}" class='usuario-link'>
@@ -35,6 +36,10 @@
             <div style="border-top: 0.1rem solid #357CFF;">{{ veiculo.num_chassi }}</div>
         </div>
         <a href="{% url 'veiculos:historico' veiculo.placa %}" class="btn-historico">Mostra Historico</a>
-        <a href="#" class="btn-apagar">Apagar Veiculo</a>
+        <form action="{% url 'veiculos:delete' veiculo.placa %}" method="post">
+            {% csrf_token %}
+            <input class="btn-apagar" type="submit" value="Apagar Veiculo">
+        </form>
+        <a href="{% url 'veiculos:edit' veiculo.placa %}" class="btn-editar"><img src="{% static 'main/img/icoEdit.png' %}" alt="icone de edição">Editar Veículo</a>
     {% endif %}
 </div>

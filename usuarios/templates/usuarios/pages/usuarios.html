@@ -11,9 +11,10 @@
 			{% endif %}
 			<div class='card-empresa'>{{ empresa }}</div>	
 			<div style="margin-top: 2rem;">
+				{% include 'main/partials/menssage.html' %}
 				<form action="">
 					<div class="barra-pesquisa">
-						<input type="search" name="pesquisa" id="usuario_pesquisa" placeholder="Digite o Nome do Usuario" autocomplete="off">
+						<input type="search" name="pesquisa" id="usuario_pesquisa" placeholder="Digite o nome do usuario" autocomplete="off">
 						<button type="submit">🔍</button>
 					</div>
 				</form>

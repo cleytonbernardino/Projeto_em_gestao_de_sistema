@@ -97,6 +97,10 @@ img {
 	color: var(--color-dark-text);
 }
 
+.message-content {
+	text-align: center;
+}
+
 .message-error {
 	border: 1px solid var(--color-dark-text);
 	background: var(--color-error-light);

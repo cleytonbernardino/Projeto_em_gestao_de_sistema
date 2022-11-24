@@ -30,16 +30,24 @@ def usuarios(request):
     })
 
 
-def usuario_detalhado(request, id):
-    nv_acesso = request.session.get('nv_acesso', 0)
-    if nv_acesso == 0:
+def detailed_user(request, id):
+    access_level = request.session.get('nv_acesso', 0)
+    if access_level == 0:
         messages.error(
             request, 'Você deve Estar logado para poder fazer isso.')
         return redirect('main:login')
-    usuario = User.objects.get(pk=id)
+
+    business = request.session.get('empresa', {'nome': 'erro', 'id': 0})
+    try:
+        user = User.objects.get(
+            empresa_id=business['id'],
+            nv_acesso=1,
+            pk=id)
+    except User.DoesNotExist:
+        raise Http404
     return render(request, 'usuarios/pages/usuario_completo.html', context={
-        'usuario': usuario,
-        'nv_acesso': nv_acesso,
+        'usuario': user,
+        'nv_acesso': access_level,
         'completo': True,
     })
 
@@ -83,17 +91,21 @@ def usuario_cadastro_auth(request):
     return redirect('usuarios:usuario_cadastro')
 
 
-def delete_user(request):
+def delete_user(request, id: int):
     if not request.POST:
         raise HttpResponseForbidden()
 
-    email = request.POST.get('email', None)
     business = request.session.get('empresa', {'nome': 'erro', 'id': 0})
-    if email is None:
-        return redirect('usuarios:usuarios')  # Colocar uma message falando que não pode ser excluido # noqa: E501
+    try:
+        user = User.objects.get(
+            empresa_id=business['id'],
+            nv_acesso=1,
+            pk=id
+        )
+        user.delete()
+        messages.success(request, 'Usuario apagado com sucesso')
+    except User.DoesNotExist:
+        # Colocar uma Mesagem falando não foi possível excluir esse usuario
+        return redirect('usuarios:usuarios')
 
-    User.objects.delete(
-        empresa_id=business['id'],
-        email=email
-    )
     return redirect('usuarios:usuarios')
