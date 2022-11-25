@@ -1,9 +1,7 @@
 {% extends 'global/base.html' %}
 {% load static %}
 {% block content %}
-<div class="banner">
-    <img class="image-banner-curto" src="{% static 'main/img/baner-curto.jpg' %}">
-</div>
+{% include 'global/partials/banner.html' %}
 <div class="pesquisa-container">
     <form action="" class="pesquisa-placa">
         <div class="barra-pesquisa">
@@ -19,10 +17,9 @@
         <div class="empresa-nome">
             <span>Mirage Seguros</span>
         </div>
-        {% include 'veiculos/partials/info_veiculo.html' %}
+        {% include 'veiculos/partials/vehicle_info.html' %}
     </div>
     </div>
 </div>
 {% endblock content %}
-{% comment %} MELHORAR ESSE JS, E MUDAR ELE DE LUGAR {% endcomment %}
-{% block script %}<script src="{% static 'main/js/test.js' %}"></script>{% endblock script %}
+

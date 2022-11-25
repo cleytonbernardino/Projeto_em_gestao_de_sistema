@@ -8,7 +8,7 @@ from shapely.geometry import Point
 from .models import Veiculo, VeiculoHistorico
 
 
-def gerar_mapa(latitude: float, longitude: float):
+def generate_map(latitude: float, longitude: float):
     url_confg = {
         'api_key': environ.get('api_key'),
         'latitude': latitude,
@@ -23,10 +23,10 @@ def gerar_mapa(latitude: float, longitude: float):
     # urlretrieve(URL, 'media/main/mapa/mapa.jpg')
 
 
-def get_vehicle(business_id: int, license_plate: str = ''):
+def get_vehicle(firm_id: int, license_plate: str = ''):
     try:
         return Veiculo.objects.get(
-            empresa_id=business_id,
+            empresa_id=firm_id,
             placa=license_plate
         )
     except Veiculo.DoesNotExist:
@@ -37,8 +37,8 @@ def get_vehicle(business_id: int, license_plate: str = ''):
             'modelo': 'Desconhecido',
             'proprietario': 'Desconhecido(a)',
             'pais': 'Desconhecido',
+            'cor': 'Desconhecida',
             'placa': license_plate if license_plate != '' else 'Desconhecida',
-            'num_chassi': 'Desconhecido',
         }
 
 

@@ -1,0 +1,18 @@
+<div class="usuario">
+    {% if not complete %}
+        <a href="{% url 'users:detailed_user' user.id %}" class='usuario-link'>
+            <div class="usuario-nome">
+                <div>{{ user.nome }}</div>
+            </div>
+        </a>
+    {% else %}
+        <a href="{% url 'users:users' %}" class="btn-voltar">◀</a>
+        <div style='margin-bottom: 1rem;'>
+            <div>{{ user.nome }}</div>
+        </div>
+        <form action="{% url 'users:delete' user.pk %}" method="POST">
+            {% csrf_token %}
+            <button class="btn-apagar" type="submit">Apagar Usuario</button>
+        </form>
+    {% endif %}
+</div>

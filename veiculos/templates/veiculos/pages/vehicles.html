@@ -1,0 +1,31 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'global/partials/banner.html' %}
+	<div class="form">	
+		<div class="card destaque">	
+			{% if back %}
+				<a href="{% url 'vehicles:vehicles' %}" class="btn-voltar">◀</a>
+			{% endif %}
+			<div class='card-empresa'>{{ firm }}</div>	
+			<div style="margin-top: 2rem;">
+				<form action="">
+					{% include 'global/partials/messages.html' %}
+					<div class="barra-pesquisa">
+						<input type="search" name="pesquisa" id="usuario_pesquisa" placeholder="Digite a placa do veiculo" autocomplete="off" value="{{ search }}">
+						<button type="submit">🔍</button>
+					</div>
+				</form>
+				<div class="card-top">
+					<div>Placa</div>
+					{% if vehicles %}
+						{% for vehicle in vehicles %}
+							{% include 'veiculos/partials/vehicle.html' %}
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+			<a href="{% url 'vehicles:vehicle_registration' %}" class="btn-cadastro">✚ Novo veículo</a>
+		</div>						
+	</div>
+{% endblock content %}

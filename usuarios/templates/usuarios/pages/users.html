@@ -1,0 +1,31 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'global/partials/banner.html' %}
+	<div class="form">	
+		<div class="card destaque">	
+			{% if back %}
+				<a href="{% url 'users:users' %}" class="btn-voltar">◀</a>
+			{% endif %}
+			<div class='card-empresa'>{{ firm }}</div>	
+			<div style="margin-top: 2rem;">
+				<form>
+					{% include 'global/partials/messages.html' %}
+					<div class="barra-pesquisa">
+						<input type="search" name="pesquisa" id="usuario_pesquisa" placeholder="Digite o nome do usuario" autocomplete="off" value="{{ search }}">
+						<button type="submit">🔍</button>
+					</div>
+				</form>
+				<div class="card-top">
+					<div>Nome</div>
+					{% if users %}
+						{% for user in users %}
+							{% include 'usuarios/partials/user.html' %}
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+			<a href="{% url 'users:user_registration' %}" class="btn-cadastro">✚ Novo usuario</a>
+		</div>						
+	</div>
+{% endblock content %}

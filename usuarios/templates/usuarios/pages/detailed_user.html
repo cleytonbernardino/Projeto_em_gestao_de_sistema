@@ -1,14 +1,12 @@
 {% extends 'global/base.html' %}
 {% load static %}
 {% block content %}
-	<div class="banner">
-		<img class="image-banner-curto" src="{% static 'main/img/baner-curto.jpg' %}">
-	</div>
+{% include 'global/partials/banner.html' %}
 	<div class="form">	
 		<div class="card destaque">
 			<div class="card-top">                
 				<div>Nome</div>
-				{% include 'usuarios/partials/usuario.html' %}
+				{% include 'usuarios/partials/user.html' %}
 			</div>
 		</div>						
 	</div>

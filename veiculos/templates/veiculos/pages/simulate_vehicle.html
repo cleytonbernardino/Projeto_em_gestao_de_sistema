@@ -1,9 +1,7 @@
 {% extends 'global/base.html' %}
 {% load static %}
 {% block content %}
-	<div class="banner">
-		<img class="image-banner-curto" src="{% static 'main/img/baner-curto.jpg' %}">
-	</div>
+{% include 'global/partials/banner.html' %}
 
 	<form class="form" action="{% url 'veiculos:salvar_cordenadas' %}" method="post">
 		{% csrf_token %}

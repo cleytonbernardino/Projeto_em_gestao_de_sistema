@@ -20,6 +20,11 @@ class VeiculoForm(forms.Form):
             'autocomplete': 'off',
         })
     )
+    cor = forms.CharField(
+        label='Cor',
+        widget=forms.TextInput()
+    )
+
     placa = forms.CharField(
         label='Número da placa',
         widget=forms.TextInput(attrs={
@@ -28,9 +33,7 @@ class VeiculoForm(forms.Form):
     )
     pais = forms.CharField(
         label='Pais',
-        widget=forms.TextInput(attrs={
-            'autocomplete': 'off',
-        })
+        widget=forms.TextInput()
     )
     foto_veiculo = forms.ImageField(
         label='Foto do Veículo',

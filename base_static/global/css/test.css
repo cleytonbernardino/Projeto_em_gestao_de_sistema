@@ -2,6 +2,10 @@
     display: none;
 }
 
+.help-text {
+    color: gray;
+    font-size: .8rem;
+}
 .mapa-container {
     width: 100%;
     display: flex;
@@ -129,7 +133,8 @@
     display: flex;
     border: .1rem solid black;
     border-radius: .5rem;
-    padding: .1rem   
+    padding: .1rem; 
+    margin-top: .5rem;  
 }
 
 .barra-pesquisa input {
@@ -173,6 +178,7 @@
     padding: 0.2rem 4rem;
     transition: all 300ms ease-in-out;
     cursor: pointer;
+    width: 15rem;
 }
 
 .btn-apagar:hover {
@@ -193,6 +199,23 @@
 .btn-historico:hover {
     color: white;
     background: dodgerblue;
+}
+
+.btn-editar {
+    position: absolute;
+    right: 0.5rem;
+    color: #2E64AB;
+    transition: all 300ms ease-in-out;
+}
+
+.btn-editar:hover {
+    color: #4594FF;
+    border-bottom: 0.1rem solid #4594FF;
+}
+
+.btn-editar img {
+    width: 1rem;
+    display: inline;
 }
 
 .usuario-link {

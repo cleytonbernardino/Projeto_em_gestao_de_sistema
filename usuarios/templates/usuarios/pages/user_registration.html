@@ -1,19 +1,17 @@
 {% extends 'global/base.html' %}
 {% load static %}
 {% block content %}
-	<div class="banner">
-		<img class="image-banner-curto" src="{% static 'main/img/baner-curto.jpg' %}">
-	</div>
+{% include 'global/partials/banner.html' %}
 
-	<form autocomplete="off" class="form" action="{% url 'usuarios:usuarios_cadastro_auth' %}" method="POST">
+	<form autocomplete="off" class="form" action="{% url 'users:user_registration_auth' %}" method="POST">
 		{% csrf_token %}
 		<div class = "card destaque">
 			<div class="card-top">
-				<a href="{% url 'usuarios:usuarios' %}" class="btn-voltar">◀</a>
-				<img class= "img-login" src="{% static 'main/img/user.png' %}" alt="">
+				<a href="{% url 'users:users' %}" class="btn-voltar">◀</a>
+				<img class= "img-login" src="{% static 'global/img/user.png' %}" alt="">
 				<h2 class="h2-login"> Cadastro de Novos Usuarios</h2>
-				<p class="p-login">Empresa: {{ empresa }}</p>
-				{% include 'main/partials/menssage.html' %}
+				<p class="p-login">Empresa: {{ firm }}</p>
+				{% include 'global/partials/messages.html' %}
 	
 			</div>
 			{% for form in forms %}

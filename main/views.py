@@ -1,28 +1,31 @@
 from django.contrib import messages
 from django.contrib.auth import logout
-from django.http import Http404
+from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import redirect, render
 
-from main import forms, models
+from .models import User
 
 
 def home(request):
-    nv_acesso = request.session.get('nv_acesso', 0)
+    access_level = request.session.get('access_level', 0)
     return render(request, 'main/pages/home.html', context={
-        'nv_acesso': nv_acesso,
+        'access_level': access_level,
     })
 
 
 def login(request):
-    nv_acesso = request.session.get('nv_acesso', 0)
-    if nv_acesso != 0:
-        raise Http404
+    access_level = request.session.get('access_level', 0)
+    if access_level != 0:
+        return HttpResponseForbidden()
+
+    context = {'access_level': access_level, }
+
     register_form_data = request.session.get('user_login', None)
-    form = forms.UserLoginForm(register_form_data)
-    return render(request, 'main/pages/login.html', context={
-        'form': form,
-        'nv_acesso': nv_acesso,
-    })
+    if register_form_data:
+        context["email"] = register_form_data["email"]
+        context["password"] = register_form_data["password"]
+
+    return render(request, 'main/pages/login.html', context)
 
 
 def login_auth(request):
@@ -30,32 +33,32 @@ def login_auth(request):
     if not POST:
         raise Http404
     request.session['user_login'] = POST
-    form = forms.UserLoginForm(POST)
 
-    if form.is_valid():
-        user_data = models.User.objects.filter(
-            email=POST['email'],
-            senha=POST['senha'],
-        ).first()
+    if POST['email'] and POST['password']:
+        try:
+            user = User.objects.get(
+                email=POST['email'],
+                senha=POST['password'],
+            )
+        except User.DoesNotExist:
+            messages.error(request, 'USUARIO OU SENHA INCORRETO')
+            return redirect('main:login')
 
-        if user_data:
-            del (request.session['user_login'])
-            request.session['nv_acesso'] = user_data.nv_acesso
-            request.session['empresa'] = {
-                'nome': user_data.empresa.nome, 'id': user_data.empresa_id}
+        del (request.session['user_login'])
+        request.session['access_level'] = user.nv_acesso
+        request.session['firm'] = {
+            'name': user.empresa.nome, 'id': user.empresa_id}
 
-            lembre_me = False if POST.get('lembre_me') else True
-            if lembre_me:
-                request.session.set_expiry(0)
-            return redirect('main:home')
-    messages.error(request, 'USUARIO OU SENHA INCORRETO')
-    return redirect('main:login')
+        remember_me = False if POST.get('remember-me') else True
+        if remember_me:
+            request.session.set_expiry(0)
+        return redirect('main:home')
 
 
-def sobre(request):
-    nv_acesso = request.session.get('nv_acesso', 0)
-    return render(request, 'main/pages/sobre.html', context={
-        'nv_acesso': nv_acesso,
+def about(request):
+    access_level = request.session.get('access_level', 0)
+    return render(request, 'main/pages/about.html', context={
+        'access_level': access_level,
     })
 
 
