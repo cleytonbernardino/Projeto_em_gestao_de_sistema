@@ -1,52 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
-:root {
-    --color-primary: #269fe6;
-    --color-primary-hover: #2086c2;
-    --color-primary-dark: #13141f;
-    --color-primary-dark-hover: #212336;
-    --color-primary-light: #d4ecfa;
-    --color-primary-light-hover: #bdd8e7;
-
-    --color-white: #fff;
-    --color-black: #000;
-
-    --color-dark-text: #444;
-    --color-info-light: #cce5ff;
-    --color-debug-light: #cce5ff;
-    --color-success-light: #d4edda;
-    --color-alert-light: #fff3cd;
-    --color-warning-light: #fff3cd;
-    --color-error-light: #f8d7da;
-
-    --color-info-dark: #4d86c4;
-    --color-debug-dark: #4d86c4;
-    --color-success-dark: #4a9c5d;
-    --color-alert-dark: #927f40;
-    --color-warning-dark: #927f40;
-    --color-error-dark: #da525d;
-
-    --color-gray-0: #f9f9f9;
-    --color-gray-1: #e0e0e0;
-    --color-gray-2: #c7c7c7;
-    --color-gray-3: #aeaeae;
-    --color-gray-4: #959595;
-    --color-gray-5: #7d7d7d;
-    --color-gray-6: #646464;
-    --color-gray-7: #4b4b4b;
-    --color-gray-8: #323232;
-    --color-gray-9: #191919;
-
-    --font-primary: sans-serif;
-    --font-headings: 'Roboto Slab', serif;
-    --font-paragraph: 'Roboto', sans-serif;
-
-    --spacing-gutter-small: 2rem;
-    --spacing-gutter-medium: 3rem;
-    --spacing-gutter-large: 4rem;
-}
-
 * {
 	/*este deixa todo o conteudo da pagina 
 	como se estivese em uma caixa, ajudando
@@ -487,355 +441,291 @@ pra nao ficar fazendo uma por uma*/
 	color: white;
 }
 
-
-
-/*MEDIA QUERY*/
-/*isto define estilos defirentes
-para determinados tamanhos de telas*/
-@media(min-width:480px) {
-	.logo {
-		font-size: 40px;
-	}
-
-	.image-banner-curto {
-		height: 70px;
-		width: 100%;
-	}
-
-	.icon-menu {
-		display: block;
-		width: 33px;
-		height: 33px;
-		background: white;
-		border-radius: 5px;
-		cursor: pointer;
-
-	}
-
-
-
-	.nav {
-		width: 195px;
-	}
-
-	.menu_hamburguer {
-		width: 23px;
-		margin: 5px 5px;
-	}
-
-	.banner_titulo {
-		font-size: 25px;
-		margin-top: 95px;
-	}
-
-
-	/*aqui por conta do media query o texto
-	que esta la no index em banner_txt so 
-	aparece quando 
-	chegar no tamanho definido pela midia 
-	query*/
-	.banner_txt {
-		font-size: 14px;
-		margin: 0;
-		margin-top: 10px;
-	}
-
-	/*este deixou as tres imagems uma do lado 
-	da outra com espacos*/
-	/*isto so ira acontecer quando ele estiver 
-	na resolucao definida pelo media querry*/
-	.info,
-	.cursos {
-		display: flex;
-		justify-content: space-between;
-		margin-top: -55px;
-	}
-
-
-
-	.info_coluna {
-		width: 32%;
-	}
-
-	.info_img {
-		height: 140px;
-	}
-
-	.info_titulo {
-		font-size: 30px;
-		margin: 5px 0;
-	}
-
-	.info_txt {
-		font-size: 17px;
-	}
-
-	.section_titulo {
-		width: 100%;
-		font-size: 45px;
-
-	}
-
-	.cursos {
-		/*deixa os objetos um do lado do outro*/
-		flex-wrap: wrap;
-		margin-top: 0;
-	}
-
-	.cursos_coluna {
-		width: 48%;
-
-	}
-
-	/* rodapé*/
-	.footer .social[class^="icon-"] {
-		margin: 0 10px;
-	}
-
+.hidden {
+    display: none;
 }
 
-@media(min-width:768px) {
-	.image-banner {
-		height: 350px;
-	}
-
-
-
-	.info_img {
-		height: 230px;
-	}
-
-	.logo {
-		font-size: 45px;
-	}
-
-	.image-banner-curto {
-		height: 70px;
-		width: 100%;
-	}
-
-	.menu_hamburguer {
-		width: 25px;
-		margin: 5px 5px;
-	}
-
-	.icon-menu {
-		display: block;
-		width: 35px;
-		height: 35px;
-		background: white;
-		border-radius: 5px;
-		cursor: pointer;
-
-	}
-
-	.nav {
-		margin-top: 15px;
-		width: 217px;
-	}
-
-	.menu_link {
-		padding: 17px;
-		font-size: 12px;
-	}
-
-	.banner_titulo {
-		font-size: 30px;
-		margin-top: 95px;
-
-	}
-
-	.banner_txt {
-		font-size: 17px;
-		margin-right: 30px;
-
-	}
-
-
-
-	.cursos_titulo {
-		font-size: 45px;
-	}
-
-	.cursos_txt {
-		font-size: 17px;
-	}
+.help-text {
+    color: gray;
+    font-size: .8rem;
+}
+.mapa-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0 auto;
+    gap: 1rem;
 }
 
-@media(min-width:1024px) {
+.mapa-content {
+    width: 100%;
+    padding: 0;
+}
 
-	.cursos_img {
-		width: 700px;
+.pesquisa-container {
+    width: 82rem;
+    margin: 1rem;
+}
 
-	}
+.map{
+    background-image: url(https://files.tecnoblog.net/wp-content/uploads/2022/02/kiev-google-maps-2-700x417.png);
+}
 
-	.menu_link {
-		color: white;
-	}
+.pesquisa-placa {
+    width: 30rem;
+    margin: 1rem auto;
+    margin-top: 0;
+}
 
+.empresa-nome {
+    position: absolute;
+    background: cornflowerblue;
+    padding: 5rem 1rem 1rem 1rem;
+    top: -4.2rem;
+    padding-top: 1rem;
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+}
 
-	.image-banner-curto {
-		height: 70px;
-		width: 100%;
-	}
+.map-menu {
+    position: absolute;
+    width: 2rem;
+    left: 1rem;
+}
 
-	.image-banner {
-		height: 400px;
-	}
+.open {
+    font-size: 2.4rem;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    background: none;
+}   
 
-	.conteudo {
-		width: 1000px;
-	}
+.close {
+    color: red;
+    border: none;
+    font-size: 1.3rem;
+    padding: 0;
+    float: right;
+    text-align: right;
+}
 
-	.section_titulo {
-		font-size: 40px;
-		margin: 30px 0;
-	}
+.info-car-container {
+    width: 100%;
+    height: 22.9rem;
+    margin-right: 0.5rem;
+}
 
-	.nav {
-		/*este deixa a posição estatica*/
-		position: static;
-		width: auto;
-		margin-top: -7px;
+.info-car-content img {
+    max-width: 100%;
+    max-height: 18rem;
+}
 
-	}
+.info-car-content .btn-limpar {
+    background: white;
+    color: red;
+    margin-top: 1rem;
+    width: 100%;
+    border: .1rem solid;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
 
-	.menu {
-		display: flex;
-	}
+.item-veiculo {
+    margin-bottom: 1rem;
+    background: #dde1e7;
+    border-radius: 6px;
+    box-shadow: inset -3px -3px 7px #ffffffb0, 
+    inset 3px 3px 5px rgb(94 104 121 / 69%);
+}
 
-	/*este retira o menu hamburguer*/
-	.icon-menu {
-		display: none;
-	}
+.item-titulo {
+    margin: .5rem 0; 
+    text-align: center;
+    border-radius: .3rem;
+    border: .13rem solid cornflowerblue;
+    border-top: 0;
+    border-left: 0;
+    background: white;
+}
 
-	.menu_link {
-		/*este tira a cor do menu*/
-		background: none;
-		font-size: 20px;
-	}
+.item-texto {
+    background: white;
+    border: .1rem solid cornflowerblue;
+    border-radius: .4rem;
+    padding: .3rem;
+    text-align: center;
+}
 
-	/* elinina a cor vermelha do cabecario*/
-	.header {
-		background: none;
-	}
+.barra-pesquisa input,
+.barra-pesquisa button {
+    outline: none;
+    background: none;
+    border: none;
+}
 
-	.select {
-		color: white;
+.barra-pesquisa {
+    display: flex;
+    border: .1rem solid black;
+    border-radius: .5rem;
+    padding: .1rem; 
+    margin-top: .5rem;  
+}
 
-	}
+.barra-pesquisa input {
+    padding: .3rem;
+    width: 90%;
+}
 
-	.banner_titulo {
-		font-size: 35px;
-	}
+.barra-pesquisa:focus-within{
+    background: white;
+    border: cornflowerblue solid .1rem;
+}
 
-	.banner-txt {
-		font-size: 25px;
-	}
+.barra-pesquisa button {
+    cursor: pointer;
+}
 
-	.info {
-		margin-top: -50px;
-	}
+.usuario-nome{
+    margin: 1rem;
+    transition: all 300ms ease-in-out;
+}
 
-	.info_coluna {
-		padding: 10px;
-	}
+.usuario-nome:hover{
+    color: white;
+    background: cornflowerblue;
+}
 
-	.info_titulo {
-		font-size: 30px;
-		text-align: center;
+.btn-voltar {
+    position: absolute;
+    top: 0rem;
+    left: 0.5rem;
+    font-size: 1.5rem;
+    color: cornflowerblue;
+}
 
-	}
+.btn-apagar {
+    color: red;
+    border: 0.1rem solid red;
+    border-radius: 0.5rem;
+    padding: 0.2rem 4rem;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+    width: 15rem;
+}
 
-	.info_txt {
-		font-size: 15px;
-	}
+.btn-apagar:hover {
+    background: red;
+    color: white;
+}
 
+.btn-historico {
+    display: block;
+    width: 15rem;
+    margin: 0.5rem auto;
+    border: 0.1rem solid dodgerblue;
+    border-radius: 0.5rem;
+    color: dodgerblue;
+    transition: all 300ms ease-in-out;
+}
 
+.btn-historico:hover {
+    color: white;
+    background: dodgerblue;
+}
 
-	.cursos_titulo {
-		font-size: 30px;
-	}
+.btn-editar {
+    position: absolute;
+    right: 0.5rem;
+    color: #2E64AB;
+    transition: all 300ms ease-in-out;
+}
 
-	.cursos_txt {
-		font-size: 15px;
-	}
+.btn-editar:hover {
+    color: #4594FF;
+    border-bottom: 0.1rem solid #4594FF;
+}
 
-	@media(min-width:1280px) {
-		.conteudo {
-			width: 1200px;
+.btn-editar img {
+    width: 1rem;
+    display: inline;
+}
 
-		}
+.usuario-link {
+    color: inherit;
+    text-decoration: none;
+}
 
+.usuario-nome {
+    border: 0.1rem solid cornflowerblue;
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
 
+.destaque {
+    box-shadow: 9px 4px 11px 0px rgba(50, 50, 50, 0.66);
+    position: relative;
+    overflow: hidden;
+}
 
-		.image-banner-curto {
-			height: 70px;
-			width: 100%;
-		}
+.btn-cadastro {
+    transition: all 100ms ease-in-out;
+    text-decoration: none;
+    color: #2E64AB;
+    position: absolute;
+    right: 1rem;
+}
 
+.btn-cadastro:hover {
+    color: #4594FF;
+    border-bottom: 0.1rem solid #4594FF;
+}
 
-		.image-banner {
-			height: 500px;
-		}
+.card-empresa {
+    margin: 0 auto;
+    border-top: 0;
+    width: fit-content;
+    border-radius: 0.5rem;
+    position: absolute;
+    top: -1rem;
+    right: 0;
+    left: 0;
+    padding: 1rem;
+    background: cornflowerblue;
+    padding-top: 2rem;
+}
 
-		.banner_titulo {
-			margin-top: 200px;
-		}
+/* ----------------------------------------------- */
 
-		.banner .conteudo {
-			top: 40%;
-		}
+.historico-container {
+    width: 45rem;
+    margin: 1rem auto;
+    padding: 1rem;
+}
 
-		.info {
-			margin-top: -35px;
-		}
+.historico-placa {
+    background: cornflowerblue;
+    width: 30rem;
+    margin: 1rem auto;
+    margin-top: 0;
+    border-radius: 0.7rem;
+    color: white;
+}
 
-		.banner_titulo {
-			margin-right: 450px;
-			font-size: 40px;
+.table-line {
+    margin-bottom: .5rem;
+}
 
-		}
-
-		.banner_txt {
-			margin-right: 450px;
-			font-size: 17px;
-
-		}
-
-		.section_titulo {
-			font-size: 50px;
-
-
-		}
-
-		.info_img {
-			height: 300px;
-		}
-
-		.logo {
-			font-size: 50px;
-		}
-
-		.menu_link {
-			font-size: 21px;
-		}
-
-		.menu {
-			margin-right: -50px;
-
-		}
-
-		.cursos {
-			margin-left: 12px;
-		}
-
-		.footer .conteudo {
-			margin-left: 65px;
-		}
-
-
-
-	}
-
+.table-content {
+    text-align: center;
 }

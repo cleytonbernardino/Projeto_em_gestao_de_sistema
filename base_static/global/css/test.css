@@ -1,290 +1,54 @@
-.hidden {
+.verification-container {
     display: none;
-}
-
-.help-text {
-    color: gray;
-    font-size: .8rem;
-}
-.mapa-container {
-    width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    margin: 0 auto;
-    gap: 1rem;
-}
-
-.mapa-content {
-    width: 100%;
-    padding: 0;
-}
-
-.pesquisa-container {
-    width: 82rem;
-    margin: 1rem;
-}
-
-.map{
-    background-image: url(https://files.tecnoblog.net/wp-content/uploads/2022/02/kiev-google-maps-2-700x417.png);
-}
-
-.pesquisa-placa {
-    width: 30rem;
-    margin: 1rem auto;
-    margin-top: 0;
-}
-
-.empresa-nome {
-    position: absolute;
-    background: cornflowerblue;
-    padding: 5rem 1rem 1rem 1rem;
-    top: -4.2rem;
-    padding-top: 1rem;
-    border-bottom-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    width: fit-content;
-}
-
-.map-menu {
-    position: absolute;
-    width: 2rem;
-    left: 1rem;
-}
-
-.open {
-    font-size: 2.4rem;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    background: none;
-}   
-
-.close {
-    color: red;
-    border: none;
-    font-size: 1.3rem;
-    padding: 0;
-    float: right;
-    text-align: right;
-}
-
-.info-car-container {
-    width: 100%;
-    height: 22.9rem;
-    margin-right: 0.5rem;
-}
-
-.info-car-content img {
-    max-width: 100%;
-    max-height: 18rem;
-}
-
-.info-car-content .btn-limpar {
     background: white;
-    color: red;
-    margin-top: 1rem;
-    width: 100%;
-    border: .1rem solid;
+    width: 25rem;
+    margin: 5rem auto;
     border-radius: 0.5rem;
-    padding: 0.2rem;
+}
+
+.verification-content {
     text-align: center;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
+    align-items: center;
 }
 
-.item-veiculo {
-    margin-bottom: 1rem;
-    background: #dde1e7;
-    border-radius: 6px;
-    box-shadow: inset -3px -3px 7px #ffffffb0, 
-    inset 3px 3px 5px rgb(94 104 121 / 69%);
+.verification-text {
+    padding: 1.5rem
 }
 
-.item-titulo {
-    margin: .5rem 0; 
-    text-align: center;
-    border-radius: .3rem;
-    border: .13rem solid cornflowerblue;
-    border-top: 0;
-    border-left: 0;
-    background: white;
+.button-box {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
 }
 
-.item-texto {
-    background: white;
-    border: .1rem solid cornflowerblue;
-    border-radius: .4rem;
-    padding: .3rem;
-    text-align: center;
+.choice-button{
+    border: 0.1rem solid #ACAFAC;
+    border-left: none;
+    border-bottom: none;
+    padding: 0.5rem 0;
+    transition: 200ms ease-in-out;
+    transition-property: color, background-color;
 }
 
-.barra-pesquisa input,
-.barra-pesquisa button {
-    outline: none;
-    background: none;
-    border: none;
-}
-
-.barra-pesquisa {
-    display: flex;
-    border: .1rem solid black;
-    border-radius: .5rem;
-    padding: .1rem; 
-    margin-top: .5rem;  
-}
-
-.barra-pesquisa input {
-    padding: .3rem;
-    width: 90%;
-}
-
-.barra-pesquisa:focus-within{
-    background: white;
-    border: cornflowerblue solid .1rem;
-}
-
-.barra-pesquisa button {
-    cursor: pointer;
-}
-
-.usuario-nome{
-    margin: 1rem;
-    transition: all 300ms ease-in-out;
-}
-
-.usuario-nome:hover{
-    color: white;
-    background: cornflowerblue;
-}
-
-.btn-voltar {
-    text-decoration: none;
-    position: absolute;
-    top: 0rem;
-    left: 0.5rem;
-    font-size: 1.5rem;
-    color: cornflowerblue;
-}
-
-.btn-apagar {
-    text-decoration: none;
-    color: red;
-    border: 0.1rem solid red;
-    border-radius: 0.5rem;
-    padding: 0.2rem 4rem;
-    transition: all 300ms ease-in-out;
-    cursor: pointer;
-    width: 15rem;
-}
-
-.btn-apagar:hover {
-    background: red;
-    color: white;
-}
-
-.btn-historico {
-    display: block;
-    width: 15rem;
-    margin: 0.5rem auto;
-    border: 0.1rem solid dodgerblue;
-    border-radius: 0.5rem;
+.choice-button:hover {
     color: dodgerblue;
-    transition: all 300ms ease-in-out;
+    background-color: #F4F3F2;
 }
 
-.btn-historico:hover {
-    color: white;
-    background: dodgerblue;
-}
-
-.btn-editar {
-    position: absolute;
-    right: 0.5rem;
-    color: #2E64AB;
-    transition: all 300ms ease-in-out;
-}
-
-.btn-editar:hover {
-    color: #4594FF;
-    border-bottom: 0.1rem solid #4594FF;
-}
-
-.btn-editar img {
-    width: 1rem;
-    display: inline;
-}
-
-.usuario-link {
-    color: inherit;
-    text-decoration: none;
-}
-
-.usuario-nome {
-    border: 0.1rem solid cornflowerblue;
-    border-radius: 0.5rem;
-    padding: 0.3rem;
-    margin-top: 0.5rem;
+.choice-button-no {
     cursor: pointer;
 }
 
-.destaque {
-    box-shadow: 9px 4px 11px 0px rgba(50, 50, 50, 0.66);
-    position: relative;
-    overflow: hidden;
+.choice-button-yes {
+    border-right: none;
 }
 
-.btn-cadastro {
-    transition: all 100ms ease-in-out;
-    text-decoration: none;
-    color: #2E64AB;
-    position: absolute;
-    right: 1rem;
+.choice-button-yes:hover {
+    color: orange;
 }
 
-.btn-cadastro:hover {
-    color: #4594FF;
-    border-bottom: 0.1rem solid #4594FF;
+.ch:checked + .verification-container{
+    display: block;
 }
 
-.card-empresa {
-    margin: 0 auto;
-    border-top: 0;
-    width: fit-content;
-    border-radius: 0.5rem;
-    position: absolute;
-    top: -1rem;
-    right: 0;
-    left: 0;
-    padding: 1rem;
-    background: cornflowerblue;
-    padding-top: 2rem;
-}
-
-/* ----------------------------------------------- */
-
-.historico-container {
-    width: 45rem;
-    margin: 1rem auto;
-    padding: 1rem;
-}
-
-.historico-placa {
-    background: cornflowerblue;
-    width: 30rem;
-    margin: 1rem auto;
-    margin-top: 0;
-    border-radius: 0.7rem;
-    color: white;
-}
-
-.table-line {
-    margin-bottom: .5rem;
-}
-
-.table-content {
-    text-align: center;
-}
+/* Fazer um js para tirar classe destaque do card e fazer sobrepor como uma confirmação */

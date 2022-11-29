@@ -1,10 +1,8 @@
 {% extends 'global/base.html' %}
 {% load static %}
-
-<!-- area do banner -->
 {% block content %} 
 {% include 'global/partials/banner.html' %}
-<form class="form" action="{% url 'main:login_auth' %}" method="POST">
+<form class="form" action="{% url 'users:login_auth' %}" method="POST">
 	{% csrf_token %}
     <div class = "card">
         <div class="card-top">

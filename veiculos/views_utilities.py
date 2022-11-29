@@ -5,7 +5,7 @@ from geopandas.tools import reverse_geocode
 from geopy.exc import GeocoderTimedOut
 from shapely.geometry import Point
 
-from .models import Veiculo, VeiculoHistorico
+from .models import Vehicle, VehicleHistoric
 
 
 def generate_map(latitude: float, longitude: float):
@@ -23,30 +23,30 @@ def generate_map(latitude: float, longitude: float):
     # urlretrieve(URL, 'media/main/mapa/mapa.jpg')
 
 
-def get_vehicle(firm_id: int, license_plate: str = ''):
+def get_vehicle(firm_pk: int, license_plate: str = ''):
     try:
-        return Veiculo.objects.get(
-            empresa_id=firm_id,
-            placa=license_plate
+        return Vehicle.objects.get(
+            firm_id=firm_pk,
+            license_plate=license_plate
         )
-    except Veiculo.DoesNotExist:
+    except Vehicle.DoesNotExist:
         return {
-            'foto_carro': {
+            'photo_car': {
                 'url': '/media/main/mapa/logo.png',
             },
-            'modelo': 'Desconhecido',
-            'proprietario': 'Desconhecido(a)',
-            'pais': 'Desconhecido',
-            'cor': 'Desconhecida',
-            'placa': license_plate if license_plate != '' else 'Desconhecida',
+            'model': 'Desconhecido',
+            'owner': 'Desconhecido(a)',
+            'country': 'Desconhecido',
+            'color': 'Desconhecida',
+            'license_plante': license_plate if license_plate != '' else 'Desconhecida',
         }
 
 
-def get_historic(vehicle: Veiculo):
-    if type(vehicle) != Veiculo:
+def get_historic(vehicle: Vehicle):
+    if type(vehicle) != Vehicle:
         raise ValueError()
 
-    historic = VeiculoHistorico.objects.filter(
+    historic = VehicleHistoric.objects.filter(
         veiculo=vehicle
     ).order_by('-pk')
     return historic if historic else None

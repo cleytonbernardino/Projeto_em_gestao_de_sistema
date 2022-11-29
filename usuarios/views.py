@@ -1,10 +1,54 @@
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.db import IntegrityError
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import redirect, render
 
-from main.models import Empresa, User
 from usuarios.forms import UserRegisterForm
+
+from .models import Firm, User
+
+
+def login(request):
+    access_level = request.session.get('access_level', 0)
+    if access_level != 0:
+        return HttpResponseForbidden()
+
+    context = {'access_level': access_level, }
+
+    register_form_data = request.session.get('user_login', None)
+    if register_form_data:
+        context["email"] = register_form_data["email"]
+        context["password"] = register_form_data["password"]
+
+    return render(request, 'usuarios/pages/login.html', context)
+
+
+def login_auth(request):
+    POST = request.POST
+    if not POST:
+        raise Http404
+    request.session['user_login'] = POST
+
+    if POST['email'] and POST['password']:
+        try:
+            user = User.objects.get(
+                email=POST['email'],
+                password=POST['password'],
+            )
+        except User.DoesNotExist:
+            messages.error(request, 'USUARIO OU SENHA INCORRETO')
+            return redirect('users:login')
+
+        del (request.session['user_login'])
+        request.session['access_level'] = user.access_level
+        request.session['firm'] = {
+            'name': user.firm.name, 'id': user.firm_id}
+
+        remember_me = False if POST.get('remember-me') else True
+        if remember_me:
+            request.session.set_expiry(0)
+        return redirect('main:home')
 
 
 def users(request):
@@ -13,7 +57,7 @@ def users(request):
     if access_level == 0:
         messages.error(
             request, 'Você deve Estar logado para poder fazer isso.')
-        return redirect('main:login')
+        return redirect('users:login')
 
     context = {
         'access_level': access_level,
@@ -22,15 +66,15 @@ def users(request):
 
     search = request.GET.get('pesquisa', False)
     users = User.objects.filter(
-        empresa_id=firm['id'], nv_acesso=1)
+        firm_id=firm['id'], access_level=1)
 
     if search:
         context['back'] = True
         context['search'] = search
         users = User.objects.filter(
-            empresa_id=firm['id'],
-            nv_acesso=1,
-            nome__startswith=search
+            firm_id=firm['id'],
+            access_level=1,
+            name__startswith=search
         )
     context['users'] = users
 
@@ -42,13 +86,13 @@ def detailed_user(request, id):
     if access_level == 0:
         messages.error(
             request, 'Você deve Estar logado para poder fazer isso.')
-        return redirect('main:login')
+        return redirect('users:login')
 
     firm = request.session.get('firm', {'nome': 'erro', 'id': 0})
     try:
         user = User.objects.get(
-            empresa_id=firm['id'],
-            nv_acesso=1,
+            firm_id=firm['id'],
+            access_level=1,
             pk=id)
     except User.DoesNotExist:
         raise Http404
@@ -85,14 +129,14 @@ def user_registration_auth(request):
     form = UserRegisterForm(POST)
     if form.is_valid():
         del (request.session['user_registration'])
-        firm = Empresa.objects.get(pk=session_firm['id'])
+        firm = Firm.objects.get(pk=session_firm['id'])
         try:
             User.objects.create(
                 email=request.POST['email'],
-                senha=request.POST['senha'],
-                nome=request.POST['nome'],
-                nv_acesso=1,
-                empresa=firm
+                password=request.POST['senha'],
+                name=request.POST['nome'],
+                access_level=1,
+                firm=firm
             )
             messages.success(request, 'Usuário Cadastro com Sucesso')
         except IntegrityError:
@@ -111,8 +155,8 @@ def delete_user(request, id: int):
     firm = request.session.get('firm', {'nome': 'erro', 'id': 0})
     try:
         user = User.objects.get(
-            empresa_id=firm['id'],
-            nv_acesso=1,
+            firm_id=firm['id'],
+            access_level=1,
             pk=id
         )
         user.delete()
@@ -122,3 +166,8 @@ def delete_user(request, id: int):
         return redirect('users:users')
 
     return redirect('users:users')
+
+
+def exit(request):
+    logout(request)
+    return redirect('main:home')

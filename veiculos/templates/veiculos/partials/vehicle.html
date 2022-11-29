@@ -1,45 +1,45 @@
 {% load static %}
 <div class="usuario">
     {% if not complete %}
-        <a href="{% url 'vehicles:complete_vehicle' vehicle.placa %}" class='usuario-link'>
+        <a href="{% url 'vehicles:complete_vehicle' vehicle.license_plate %}" class='usuario-link'>
             <div class="usuario-nome">
-                <div>{{ vehicle.placa }}</div>
+                <div>{{ vehicle.license_plate }}</div>
             </div>
         </a>
     {% else %}
         <a href="{% url 'vehicles:vehicles' %}" class="btn-voltar">◀</a>
         <div style='margin-bottom: 1rem;'>
             <div>Proprietario</div>
-            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.proprietario }}</div>
+            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.owner }}</div>
         </div>
         <div style='margin-bottom: 1rem;'>
-            <img src="{{ vehicle.foto_carro.url }}" alt="Imagem do veiculo rastreado">
+            <img src="{{ vehicle.photo_car.url }}" alt="Imagem do veiculo rastreado">
         </div>
         <div style='margin-bottom: 1rem;'>
             <div>Modelo</div>
-            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.modelo }}</div>
+            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.model }}</div>
         </div>
         <div style='margin-bottom: 1rem;'>
             <div>Cor</div>
-            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.cor }}</div>
+            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.color }}</div>
         </div>
         <div style='margin-bottom: 1rem;'>
             <div>Pais</div>
-            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.pais }}</div>
+            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.country }}</div>
         </div>
         <div style='margin-bottom: 1rem;'>
             <div>placa</div>
-            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.placa }}</div>
+            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.license_plate }}</div>
         </div>
         <div style='margin-bottom: 1rem;'>
             <div>Numero do Chassi</div>
-            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.num_chassi }}</div>
+            <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.num_frame }}</div>
         </div>
-        <a href="{% url 'vehicles:historic' vehicle.placa %}" class="btn-historico">Mostra Historico</a>
-        <form action="{% url 'vehicles:delete' vehicle.placa %}" method="post">
+        <a href="{% url 'vehicles:historic' vehicle.license_plate %}" class="btn-historico">Mostra Historico</a>
+        <form action="{% url 'vehicles:delete' vehicle.license_plate %}" method="post">
             {% csrf_token %}
             <input class="btn-apagar" type="submit" value="Apagar Veiculo">
         </form>
-        <a href="{% url 'vehicles:edit' vehicle.placa %}" class="btn-editar"><img src="{% static 'global/img/icoEdit.png' %}" alt="icone de edição">Editar Veículo</a>
+        <a href="{% url 'vehicles:edit' vehicle.license_plate %}" class="btn-editar"><img src="{% static 'global/img/icoEdit.png' %}" alt="icone de edição">Editar Veículo</a>
     {% endif %}
 </div>

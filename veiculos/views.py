@@ -1,5 +1,3 @@
-# from urllib.request import urlretrieve
-
 from django.contrib import messages
 from django.db import IntegrityError
 from django.http import Http404, HttpResponseForbidden
@@ -8,18 +6,18 @@ from django.urls import reverse
 
 from . import views_utilities as ult
 from .forms import VeiculoForm
-from .models import Veiculo, VeiculoHistorico
+from .models import Vehicle, VehicleHistoric
 
 
 def vehicles(request):
     access_level = request.session.get('access_level', 0)
     if access_level == 0:
         messages.error(request, 'Você deve está logado para poder fazer isso')
-        return redirect('main:login')
+        return redirect('users:login')
 
     firm = request.session.get('firm', {'name': 'erro', 'id': 0})
     search = request.GET.get('pesquisa', None)
-    vehicles = Veiculo.objects.filter(empresa_id=firm['id'])
+    vehicles = Vehicle.objects.filter(firm_id=firm['id'])
 
     context = {
         'firm': firm['name'],
@@ -28,8 +26,8 @@ def vehicles(request):
     }
 
     if search:
-        context['vehicles'] = Veiculo.objects.filter(
-            empresa_id=firm['id'],
+        context['vehicles'] = Vehicle.objects.filter(
+            firm_id=firm['id'],
             placa__startswith=search.upper())
         context['back'] = True
         context['search'] = search
@@ -41,11 +39,11 @@ def complete_vehicle(request, license_plate: str):
     access_level = request.session.get('access_level', 0)
     if access_level == 0:
         messages.error(request, 'Você deve está logado para poder fazer isso')
-        return redirect('main:login')
+        return redirect('users:login')
 
     firm = request.session.get('firm', {'name': 'erro', 'id': 0})
     vehicle = ult.get_vehicle(firm['id'], license_plate)
-    if type(vehicle) != Veiculo:
+    if type(vehicle) != Vehicle:
         raise Http404
 
     return render(request, 'veiculos/pages/complete_vehicle.html', context={
@@ -80,15 +78,15 @@ def registration_vehicle_auth(request):
     if form.is_valid():
         del (request.session['veiculo_form_data'])
         try:
-            Veiculo.objects.create(
-                empresa_id=request.session['firm']['id'],
-                proprietario=POST['proprietario'],
-                foto_carro=request.FILES['foto_veiculo'],
-                modelo=POST['modelo'],
-                pais=POST['pais'],
-                cor=POST['cor'],
-                placa=POST['placa'].upper(),
-                num_chassi=POST['num_chassi'],
+            Vehicle.objects.create(
+                firm_id=request.session['firm']['id'],
+                owner=POST['proprietario'],
+                photo_car=request.FILES['foto_veiculo'],
+                model=POST['modelo'],
+                country=POST['pais'],
+                color=POST['cor'],
+                license_plate=POST['placa'].upper(),
+                num_frame=POST['num_chassi'],
             )
             messages.success(request, 'Veículo cadastrado com sucesso')
             return redirect('vehicles:vehicle_registration')
@@ -109,7 +107,7 @@ def edit_vehicle(request, license_plate: str):
     firm = request.session.get('firm', {'name': 'erro', 'id': 0})
     vehicle = ult.get_vehicle(firm['id'], license_plate)
 
-    if type(vehicle) != Veiculo:
+    if type(vehicle) != Vehicle:
         return Http404
 
     return render(request, 'veiculos/pages/edit_vehicle.html', {
@@ -150,7 +148,7 @@ def delete_vehicle(request, license_plate: str):
         vehicle = ult.get_vehicle(firm['id'], license_plate)
         vehicle.delete()
         messages.success(request, 'Veículo apagado com sucesso')
-    except Veiculo.DoesNotExist:
+    except Vehicle.DoesNotExist:
         messages.error(request, 'Não foi possível apagar esse veículo')
 
     return redirect('vehicles:vehicles')
@@ -167,8 +165,8 @@ def save_coordinates(request):
     POST = request.POST
     if not POST:
         raise Http404
-    vehicle = Veiculo.objects.get(placa=POST['placa'])
-    VeiculoHistorico.objects.create(
+    vehicle = Vehicle.objects.get(placa=POST['placa'])
+    VehicleHistoric.objects.create(
         veiculo=vehicle,
         latitude=POST['latitude'],
         longitude=POST['longitude']
@@ -186,7 +184,7 @@ def historic(request, license_plate: str):
     streets = {}
 
     vehicle = ult.get_vehicle(firm['id'], license_plate)
-    if type(vehicle) != Veiculo:
+    if type(vehicle) != Vehicle:
         raise Http404
 
     historic = ult.get_historic(vehicle)
@@ -214,7 +212,7 @@ def search(request):
     if access_level == 0:
         messages.error(
             request, 'Você deve Estar logado para poder fazer isso.')
-        return redirect("main:login")
+        return redirect("users:login")
 
     firm = request.session.get('firm', {'name': 'erro', 'id': 0})
     placa = request.GET.get('placa', '')
@@ -227,7 +225,7 @@ def search(request):
         'vehicle': vehicle
     }
 
-    if type(vehicle) == Veiculo:
+    if type(vehicle) == Vehicle:
         historic = ult.get_historic(vehicle)
         if historic is not None:
             lati = float(historic[0].latitude)

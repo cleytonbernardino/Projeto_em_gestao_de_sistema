@@ -1,0 +1,343 @@
+@media(min-width:480px) {
+	.logo {
+		font-size: 40px;
+	}
+
+	.image-banner-curto {
+		height: 70px;
+		width: 100%;
+	}
+
+	.icon-menu {
+		display: block;
+		width: 33px;
+		height: 33px;
+		background: white;
+		border-radius: 5px;
+		cursor: pointer;
+
+	}
+
+
+
+	.nav {
+		width: 195px;
+	}
+
+	.menu_hamburguer {
+		width: 23px;
+		margin: 5px 5px;
+	}
+
+	.banner_titulo {
+		font-size: 25px;
+		margin-top: 95px;
+	}
+
+
+	/*aqui por conta do media query o texto
+	que esta la no index em banner_txt so 
+	aparece quando 
+	chegar no tamanho definido pela midia 
+	query*/
+	.banner_txt {
+		font-size: 14px;
+		margin: 0;
+		margin-top: 10px;
+	}
+
+	/*este deixou as tres imagems uma do lado 
+	da outra com espacos*/
+	/*isto so ira acontecer quando ele estiver 
+	na resolucao definida pelo media querry*/
+	.info,
+	.cursos {
+		display: flex;
+		justify-content: space-between;
+		margin-top: -55px;
+	}
+
+
+
+	.info_coluna {
+		width: 32%;
+	}
+
+	.info_img {
+		height: 140px;
+	}
+
+	.info_titulo {
+		font-size: 30px;
+		margin: 5px 0;
+	}
+
+	.info_txt {
+		font-size: 17px;
+	}
+
+	.section_titulo {
+		width: 100%;
+		font-size: 45px;
+
+	}
+
+	.cursos {
+		/*deixa os objetos um do lado do outro*/
+		flex-wrap: wrap;
+		margin-top: 0;
+	}
+
+	.cursos_coluna {
+		width: 48%;
+
+	}
+
+	/* rodapé*/
+	.footer .social[class^="icon-"] {
+		margin: 0 10px;
+	}
+
+}
+
+@media(min-width:768px) {
+	.image-banner {
+		height: 350px;
+	}
+
+
+
+	.info_img {
+		height: 230px;
+	}
+
+	.logo {
+		font-size: 45px;
+	}
+
+	.image-banner-curto {
+		height: 70px;
+		width: 100%;
+	}
+
+	.menu_hamburguer {
+		width: 25px;
+		margin: 5px 5px;
+	}
+
+	.icon-menu {
+		display: block;
+		width: 35px;
+		height: 35px;
+		background: white;
+		border-radius: 5px;
+		cursor: pointer;
+
+	}
+
+	.nav {
+		margin-top: 15px;
+		width: 217px;
+	}
+
+	.menu_link {
+		padding: 17px;
+		font-size: 12px;
+	}
+
+	.banner_titulo {
+		font-size: 30px;
+		margin-top: 95px;
+
+	}
+
+	.banner_txt {
+		font-size: 17px;
+		margin-right: 30px;
+
+	}
+
+
+
+	.cursos_titulo {
+		font-size: 45px;
+	}
+
+	.cursos_txt {
+		font-size: 17px;
+	}
+}
+
+@media(min-width:1024px) {
+
+	.cursos_img {
+		width: 700px;
+
+	}
+
+	.menu_link {
+		color: white;
+	}
+
+
+	.image-banner-curto {
+		height: 70px;
+		width: 100%;
+	}
+
+	.image-banner {
+		height: 400px;
+	}
+
+	.conteudo {
+		width: 1000px;
+	}
+
+	.section_titulo {
+		font-size: 40px;
+		margin: 30px 0;
+	}
+
+	.nav {
+		/*este deixa a posição estatica*/
+		position: static;
+		width: auto;
+		margin-top: -7px;
+
+	}
+
+	.menu {
+		display: flex;
+	}
+
+	/*este retira o menu hamburguer*/
+	.icon-menu {
+		display: none;
+	}
+
+	.menu_link {
+		/*este tira a cor do menu*/
+		background: none;
+		font-size: 20px;
+	}
+
+	/* elinina a cor vermelha do cabecario*/
+	.header {
+		background: none;
+	}
+
+	.select {
+		color: white;
+
+	}
+
+	.banner_titulo {
+		font-size: 35px;
+	}
+
+	.banner-txt {
+		font-size: 25px;
+	}
+
+	.info {
+		margin-top: -50px;
+	}
+
+	.info_coluna {
+		padding: 10px;
+	}
+
+	.info_titulo {
+		font-size: 30px;
+		text-align: center;
+
+	}
+
+	.info_txt {
+		font-size: 15px;
+	}
+
+
+
+	.cursos_titulo {
+		font-size: 30px;
+	}
+
+	.cursos_txt {
+		font-size: 15px;
+	}
+}
+
+@media(min-width:1280px) {
+    .conteudo {
+        width: 1200px;
+
+    }
+
+
+
+    .image-banner-curto {
+        height: 70px;
+        width: 100%;
+    }
+
+
+    .image-banner {
+        height: 500px;
+    }
+
+    .banner_titulo {
+        margin-top: 200px;
+    }
+
+    .banner .conteudo {
+        top: 40%;
+    }
+
+    .info {
+        margin-top: -35px;
+    }
+
+    .banner_titulo {
+        margin-right: 450px;
+        font-size: 40px;
+
+    }
+
+    .banner_txt {
+        margin-right: 450px;
+        font-size: 17px;
+
+    }
+
+    .section_titulo {
+        font-size: 50px;
+
+
+    }
+
+    .info_img {
+        height: 300px;
+    }
+
+    .logo {
+        font-size: 50px;
+    }
+
+    .menu_link {
+        font-size: 21px;
+    }
+
+    .menu {
+        margin-right: -50px;
+
+    }
+
+    .cursos {
+        margin-left: 12px;
+    }
+
+    .footer .conteudo {
+        margin-left: 65px;
+    }
+}

@@ -1,24 +1,24 @@
 from django.contrib import admin
-from veiculos.models import Veiculo, VeiculoHistorico
 
-from . import models
+from usuarios.models import Firm, User
+from veiculos.models import Vehicle, VehicleHistoric
 
 
-@admin.register(models.User)
+@admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(models.Empresa)
+@admin.register(Firm)
 class EmpresaAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Veiculo)
+@admin.register(Vehicle)
 class VeiculoAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(VeiculoHistorico)
+@admin.register(VehicleHistoric)
 class VeiculoHistoricoAdmin(admin.ModelAdmin):
     pass

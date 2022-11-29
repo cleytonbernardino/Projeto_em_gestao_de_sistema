@@ -25,9 +25,9 @@
 
                 {% if access_level != 0 %}
                     <li class="menu_item"> <a href="{% url 'vehicles:search' %}" class="menu_link"> Pesquisa</a></li>
-                    <li class="menu_item"><a href="{% url 'main:exit' %}" class="menu_link">Sair</a></li>
+                    <li class="menu_item"><a href="{% url 'users:exit' %}" class="menu_link">Sair</a></li>
                 {% else %}
-                    <li class="menu_item"><a href="{% url 'main:login' %}" class="menu_link">Login</a></li>
+                    <li class="menu_item"><a href="{% url 'users:login' %}" class="menu_link">Login</a></li>
                 {% endif %}
             </ul>
         </nav>
