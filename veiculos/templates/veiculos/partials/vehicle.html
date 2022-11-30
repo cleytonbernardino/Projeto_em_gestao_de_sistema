@@ -36,10 +36,7 @@
             <div style="border-top: 0.1rem solid #357CFF;">{{ vehicle.num_frame }}</div>
         </div>
         <a href="{% url 'vehicles:historic' vehicle.license_plate %}" class="btn-historico">Mostra Historico</a>
-        <form action="{% url 'vehicles:delete' vehicle.license_plate %}" method="post">
-            {% csrf_token %}
-            <input class="btn-apagar" type="submit" value="Apagar Veiculo">
-        </form>
+        <button class="btn-apagar" type="button">Apagar Veiculo</button>
         <a href="{% url 'vehicles:edit' vehicle.license_plate %}" class="btn-editar"><img src="{% static 'global/img/icoEdit.png' %}" alt="icone de edição">Editar Veículo</a>
     {% endif %}
 </div>

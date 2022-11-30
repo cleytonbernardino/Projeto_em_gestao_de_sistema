@@ -4,8 +4,14 @@
         {% include 'global/partials/head.html' %}
     </head>
     <body>
-        {% include 'global/partials/search_bar.html' %}
-        {% block content %}{% endblock content %}
-        {% include 'global/partials/footer.html' %}
+        <div id="page-container">
+            <div id="page-content">
+                {% include 'global/partials/search_bar.html' %}
+                {% block content %}{% endblock content %}
+            </div>
+            {% include 'global/partials/footer.html' %}
+        </div>
     </body>
 </html>
+<script src="{% static 'global/js/menu.js' %}"></script>
+{% block script %}{% endblock script %}

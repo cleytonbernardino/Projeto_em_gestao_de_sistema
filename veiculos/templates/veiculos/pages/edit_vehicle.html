@@ -2,11 +2,11 @@
 {% load static %}
 {% block content %}
 {% include 'global/partials/banner.html' %}
-	<form class="form" action="{% url 'vehicles:edit_auth' vehicle.placa %}" method="post" enctype="multipart/form-data">
+	<form class="form" action="{% url 'vehicles:edit_auth' vehicle.license_plate %}" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 		<div class = "card destaque">
 			<div class="card-top">
-				<a href="{% url 'vehicles:complete_vehicle' vehicle.placa %}" class="btn-voltar">◀</a>
+				<a href="{% url 'vehicles:complete_vehicle' vehicle.license_plate %}" class="btn-voltar">◀</a>
 				<img class= "img-login" src="{% static 'global/img/user.png' %}" alt="">
 				<h2 class="h2-login"> Editar Veículo</h2>
 				<p class="p-login">Empresa: {{ firm }}</p>
@@ -15,23 +15,23 @@
 			</div>
 			<div class="card-group">
 				<label>Nome do Proprietario</label>
-				<input type="text" name="proprietario" value="{{ vehicle.proprietario }}" required>
+				<input type="text" name="owner" value="{{ vehicle.owner }}" required>
 			</div>
 			<div class="card-group">
 				<label>Modelo do Veiculo</label>
-				<input type="text" name="modelo" value="{{ vehicle.modelo }}" placeholder="Digite o nome do proprietario" required>
+				<input type="text" name="model" value="{{ vehicle.model }}" placeholder="Digite o nome do proprietario" required>
 			</div>
 			<div class="card-group">
 				<label>Cor</label>
-				<input type="text" name="cor" value="{{ vehicle.cor }}" placeholder="Digite a cor do veículo" required>
+				<input type="text" name="color" value="{{ vehicle.color }}" placeholder="Digite a cor do veículo" required>
 			</div>
 			<div class="card-group">
 				<label>Número da placa</label>
-				<input type="text" name="placa" value="{{ vehicle.placa }}" placeholder="Digite a placa do veículo" required>
+				<input type="text" name="license_plate" value="{{ vehicle.license_plate }}" placeholder="Digite a placa do veículo" required>
 			</div>
 			<div class="card-group">
 				<label>Foto do veículo</label>
-				<input type="file" name="foto" accept="image/*">
+				<input type="file" name="photo" accept="image/*">
 				<span class="help-text">Se não for colocada nenhuma foto vai permanecer a antiga</span>
 			</div>
 			<div class="card-group">

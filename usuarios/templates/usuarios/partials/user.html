@@ -8,25 +8,9 @@
     {% else %}
         <a href="{% url 'users:users' %}" class="btn-voltar">◀</a>
         <div style='margin-bottom: 1rem;'>
-            <div>{{ user.nome }}</div>
+            <div>{{ user.name }}</div>
         </div>
-        <form action="{% url 'users:delete' user.pk %}" method="POST">
-            {% csrf_token %}
-            <button class="btn-apagar" type="submit">Apagar Usuario</button>
-            <input type="checkbox" name="" id="" class="ch">
-            <div class="verification-container">
-                <div class="verification-content">
-                    <div class="verification-text">
-                        <div>Deseja Mesmo Excluir esse item??</div>
-                    </div>
-                    <div class="button-box">
-                        <div class="choice-button choice-button-no">Não</div> 
-                        <a href="#" class="choice-button choice-button-yes">Sim</a>
-                    </div>
-                </div>
-            </div>
-            
-            </div>            
+        <button type="button" class="btn-apagar">Apagar Usuario</button>            
         </form>
     {% endif %}
 </div>

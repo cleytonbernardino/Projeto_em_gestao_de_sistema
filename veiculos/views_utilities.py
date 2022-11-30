@@ -38,7 +38,7 @@ def get_vehicle(firm_pk: int, license_plate: str = ''):
             'owner': 'Desconhecido(a)',
             'country': 'Desconhecido',
             'color': 'Desconhecida',
-            'license_plante': license_plate if license_plate != '' else 'Desconhecida',
+            'license_plate': license_plate if license_plate != '' else 'Desconhecida',
         }
 
 
@@ -47,7 +47,7 @@ def get_historic(vehicle: Vehicle):
         raise ValueError()
 
     historic = VehicleHistoric.objects.filter(
-        veiculo=vehicle
+        vehicle=vehicle
     ).order_by('-pk')
     return historic if historic else None
 

@@ -2,11 +2,41 @@
 {% load static %}
 {% block content %}
 {% include 'global/partials/banner.html' %}
-	<div class="form">	
-		<div class="card destaque">
-			<div class="card-top">                
-				{% include 'veiculos/partials/vehicle.html' %}
-			</div>
-		</div>						
+
+<div class="verification-container destaque">
+	<div class="verification-content">
+		<div class="verification-text">
+			<div>Deseja mesmo excluir esse veículo? Essa operação é irreversível.</div>
+		</div>
+		<form action="{% url 'vehicles:delete' vehicle.license_plate %}" class="form-choice" method="POST">
+			{% csrf_token %}
+			<div class="choice-button choice-button-no">Não</div> 
+			<button type="submit" class="choice-button choice-button-yes">Sim</button>
+		</form>
 	</div>
+</div>
+
+<div class="form">	
+	<div class="card destaque">
+		<div class="card-top">                
+			{% include 'veiculos/partials/vehicle.html' %}
+		</div>
+	</div>						
+</div>
 {% endblock content %}
+{% block script %} 
+<script>
+	const form = document.querySelector('.form')
+
+    document.querySelector('.btn-apagar').addEventListener('click', () => {
+        form.classList.add("pop-up")
+        document.querySelector('.verification-container').classList.add("show")
+		window.scroll(0, 0)
+    })
+
+    document.querySelector(".choice-button-no").addEventListener('click', () => {
+        form.classList.remove('pop-up')
+        document.querySelector('.verification-container').classList.remove('show')
+    })
+</script> 
+{% endblock script %}

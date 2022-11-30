@@ -127,16 +127,16 @@ def edit_vehicle_auth(request, license_plate: str):
     if vehicle is None:
         return Http404
 
-    vehicle.proprietario = POST["proprietario"]
-    vehicle.modelo = POST["modelo"]
-    vehicle.cor = POST["cor"]
-    vehicle.placa = POST["placa"]
+    vehicle.owner = POST["owner"]
+    vehicle.model = POST["model"]
+    vehicle.color = POST["color"]
+    vehicle.license_plate = POST["license_plate"]
     if request.FILES:
-        vehicle.foto_carro = request.FILES["foto"]
+        vehicle.photo_car = request.FILES["photo"]
     vehicle.save()
 
     return redirect(reverse("vehicles:complete_vehicle",
-                            kwargs={"license_plate": vehicle.placa}))
+                            kwargs={"license_plate": vehicle.license_plate}))
 
 
 def delete_vehicle(request, license_plate: str):
@@ -203,7 +203,7 @@ def historic(request, license_plate: str):
     return render(request, 'veiculos/pages/historic.html', context={
         'access_level': access_level,
         'streets': streets,
-        'license_plate': vehicle.placa,
+        'license_plate': vehicle.license_plate,
     })
 
 

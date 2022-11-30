@@ -15,6 +15,10 @@ body {
 	background-color: #f0f0f0;
 }
 
+a {
+	color: inherit;
+}
+
 h1,
 h2,
 h3,
@@ -42,13 +46,25 @@ img {
 	max-width: 100%;
 }
 
+/* ======================== page size ================================== */
+#page-container {
+	position: relative;
+	min-height: 100vh;
+}
+
+#page-content {
+	padding-bottom: 7.8rem;
+}
+
+/* ======================================================================= */
+
 /* MESSAGES */
 .message {
 	padding: 1rem;
-	border: 1px solid var(--color-dark-text);
+	border: 1px solid #444;
 	border-radius: 4px;
-	background: var(--color-gray-2);
-	color: var(--color-dark-text);
+	background: #c7c7c7;
+	color: #444;
 }
 
 .message-content {
@@ -56,44 +72,44 @@ img {
 }
 
 .message-error {
-	border: 1px solid var(--color-dark-text);
-	background: var(--color-error-light);
-	color: var(--color-error-dark);
+	border: 1px solid #444;
+	background: #f8d7da;
+	color: #da525d;
 	border-radius: 5px;
 }
 
 .message-sucess {
-	border: 1px solid var(--color-success-dark);
-	background: var(--color-success-light);
-	color: var(--color-success-dark);
+	border: 1px solid #4a9c5d;
+	background: #d4edda;	
+	color: #4a9c5d;
 	border-radius: 5px;
 }
 
 .message-warning {
-	border: 1px solid var(--color-warning-dark);
-	background: var(--color-warning-light);
-	color: var(--color-warning-dark);
+	border: 1px solid #927f40;
+	background: #fff3cd;
+	color: #927f40;
 	border-radius: 5px;
 }
 
 .message-alert {
-	border: 1px solid var(--color-alert-dark);
-	background: var(--color-alert-light);
-	color: var(--color-alert-dark);
+	border: 1px solid #927f40;
+	background: #fff3cd;
+	color: #927f40;
 	border-radius: 5px;
 }
 
 .message-info {
-	border: 1px solid var(--color-info-dark);
-	background: var(--color-info-light);
-	color: var(--color-info-dark);
+	border: 1px solid #4d86c4;
+	background: #cce5ff;
+	color: #4d86c4;
 	border-radius: 5px;
 }
 
 .message-debug {
-	border: 1px solid var(--color-debug-dark);
-	background: var(--color-debug-light);
-	color: var(--color-debug-dark);
+	border: 1px solid #4d86c4;
+	background: #cce5ff;
+	color: #4d86c4;
 	border-radius: 5px;
 }
 
@@ -134,7 +150,7 @@ img {
 
 .header .title {
 	text-decoration: none;
-	color: inherit;
+	color: dodgerblue;
 }
 
 .main .conteudo {
@@ -196,8 +212,8 @@ img {
 
 .menu_link:hover,
 .select {
-	background: grey;
-	color: black;
+	background: #cccccc83;
+	color: #389CFF;
 
 }
 
@@ -253,7 +269,6 @@ javaScript*/
 	margin-bottom: 0;
 
 }
-
 
 
 .form {
@@ -400,8 +415,6 @@ dades da opacidade*/
 
 }
 
-
-
 .menu_hamburguer {
 	width: 20px;
 	margin: 5px 5px;
@@ -426,12 +439,17 @@ pra nao ficar fazendo uma por uma*/
 	line-height: 40px;
 }
 
+/* ======================== footer ================================== */
+
 .footer {
+	width: 100%;
 	background: black;
 	color: white;
 	padding: 10px;
 	text-align: center;
-	position: relative;
+	position: absolute;
+	bottom: 0;
+	height: 7.8rem;
 }
 
 .footer .fale-conosco {
@@ -441,8 +459,18 @@ pra nao ficar fazendo uma por uma*/
 	color: white;
 }
 
+.conteudo {
+	position: relative;
+}
+
+/* ======================================================================= */
+
 .hidden {
     display: none;
+}
+
+.show {
+	display: block !important;
 }
 
 .help-text {
@@ -643,10 +671,12 @@ pra nao ficar fazendo uma por uma*/
 }
 
 .btn-editar {
+	display: block;
     position: absolute;
     right: 0.5rem;
+	bottom: .2rem;
     color: #2E64AB;
-    transition: all 300ms ease-in-out;
+    transition: color 300ms ease-in-out;
 }
 
 .btn-editar:hover {
@@ -729,3 +759,69 @@ pra nao ficar fazendo uma por uma*/
 .table-content {
     text-align: center;
 }
+
+/* ======================== delete confirmation ================================== */
+.verification-container {
+    display: none;
+    background: white;
+    width: 25rem;
+    margin: 5rem auto;
+    border-radius: 0.5rem;
+    position: absolute;
+    top: 2rem;
+    right: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.verification-content {
+    text-align: center;
+    align-items: center;
+}
+
+.verification-text {
+    padding: 1.5rem
+}
+
+.form-choice {
+    display: grid;
+	margin: 0;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.choice-button{
+	cursor: pointer;
+    border: 0.1rem solid #ACAFAC;
+    border-left: none;
+    border-bottom: none;
+    padding: 0.5rem 0;
+    transition: 200ms ease-in-out;
+    transition-property: color, background-color;
+}
+
+.choice-button:hover {
+	background-color: #F4F3F2;
+}
+
+.choice-button-no:hover {
+    color: dodgerblue;
+}
+
+.choice-button-yes {
+	font-size: inherit;
+    border-right: none;
+	background: none;
+}
+
+.choice-button-yes:hover {
+    color:orange;
+	
+}
+
+.pop-up {
+    opacity: 30%;
+    pointer-events: none;
+}
+
+/* ======================================================================= */
