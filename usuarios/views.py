@@ -54,10 +54,8 @@ def login_auth(request):
 def users(request):
     access_level = request.session.get('access_level', 0)
     firm = request.session.get('firm', {'name': 'erro', 'id': 0})
-    if access_level == 0:
-        messages.error(
-            request, 'Você deve Estar logado para poder fazer isso.')
-        return redirect('users:login')
+    if access_level != 2:
+        return HttpResponseForbidden()
 
     context = {
         'access_level': access_level,
@@ -83,10 +81,8 @@ def users(request):
 
 def detailed_user(request, id):
     access_level = request.session.get('access_level', 0)
-    if access_level == 0:
-        messages.error(
-            request, 'Você deve Estar logado para poder fazer isso.')
-        return redirect('users:login')
+    if access_level != 2:
+        return HttpResponseForbidden()
 
     firm = request.session.get('firm', {'nome': 'erro', 'id': 0})
     try:
@@ -141,7 +137,7 @@ def user_registration_auth(request):
             messages.success(request, 'Usuário Cadastro com Sucesso')
         except IntegrityError:
             messages.error(
-                request, 'Esse Usuário já foi cadastrado anteriomente')
+                request, 'Esse Email já foi cadastrado anteriomente')
 
     else:
         messages.error(request, 'Erro ao cadastrar o usuário')
@@ -160,7 +156,7 @@ def delete_user(request, id: int):
             pk=id
         )
         user.delete()
-        messages.success(request, 'Usuario apagado com sucesso')
+        messages.success(request, 'Usuário apagado com sucesso')
     except User.DoesNotExist:
         messages.error(request, 'Não foi possível excluir esse Usuário')
         return redirect('users:users')

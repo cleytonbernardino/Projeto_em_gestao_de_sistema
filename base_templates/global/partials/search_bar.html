@@ -14,20 +14,20 @@
         <nav class="nav" id="nav">
             <ul class="menu">
                 
-                <li class="menu_item "><a href="{% url 'main:home' %}" class="menu_link select">Inicio</a></li>
+                <li class="menu_item"><a href="{% url 'main:home' %}" class="menu_link">Inicio</a></li>
 
                 {% if access_level == 2 %}
-                    <li class="menu_item"><a href="{% url 'users:users' %}" class="menu_link">Usuarios</a></li>
-                    <li class="menu_item"><a href="{% url 'vehicles:vehicles' %}" class="menu_link">Veiculos</a></li>
+                    <li class="menu_item"><a href="{% url 'users:users' %}" class="menu_link">Usuários</a></li>
+                    <li class="menu_item"><a href="{% url 'vehicles:vehicles' %}" class="menu_link">Veículos</a></li>
                 {% endif %}
 
                 <li class="menu_item"><a href="{% url 'main:about' %}" class="menu_link">Sobre</a></li>
 
-                {% if access_level != 0 %}
+                {% if access_level == 0 %}
+                    <li class="menu_item"><a href="{% url 'users:login' %}" class="menu_link">Login</a></li>       
+                {% else %}
                     <li class="menu_item"> <a href="{% url 'vehicles:search' %}" class="menu_link"> Pesquisa</a></li>
                     <li class="menu_item"><a href="{% url 'users:exit' %}" class="menu_link">Sair</a></li>
-                {% else %}
-                    <li class="menu_item"><a href="{% url 'users:login' %}" class="menu_link">Login</a></li>
                 {% endif %}
             </ul>
         </nav>

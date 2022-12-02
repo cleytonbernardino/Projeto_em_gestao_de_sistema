@@ -12,7 +12,7 @@
 				<form>
 					{% include 'global/partials/messages.html' %}
 					<div class="barra-pesquisa">
-						<input type="search" name="pesquisa" id="usuario_pesquisa" placeholder="Digite o nome do usuario" autocomplete="off" value="{{ search }}">
+						<input type="search" name="pesquisa" id="usuario_pesquisa" placeholder="Digite o nome do usuário" autocomplete="off" value="{{ search }}">
 						<button type="submit">🔍</button>
 					</div>
 				</form>
@@ -25,7 +25,7 @@
 					{% endif %}
 				</div>
 			</div>
-			<a href="{% url 'users:user_registration' %}" class="btn-cadastro">✚ Novo usuario</a>
+			<a href="{% url 'users:user_registration' %}" class="btn-cadastro">✚ Novo usuário</a>
 		</div>						
 	</div>
 {% endblock content %}

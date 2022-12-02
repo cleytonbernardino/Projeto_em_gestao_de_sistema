@@ -1,4 +1,3 @@
-{% load static %}
 <html>
     <head>
         {% include 'global/partials/head.html' %}
@@ -13,5 +12,36 @@
         </div>
     </body>
 </html>
-<script src="{% static 'global/js/menu.js' %}"></script>
+<script defer>
+    (function() {
+        const btnMenu = document.getElementById('btn-menu');
+        const nav = document.getElementById('nav');
+        const menu = document.getElementsByClassName("menu_link");
+        let pathName = ["/sobre/", "/usuarios/login/"];
+        if (menu.length > 4){
+            pathName = [
+                "/usuarios/", "/veiculos/", "/sobre/", "/veiculos/pesquisa/"
+            ];
+        } else if (menu.length === 4){
+            pathName = ["/sobre/", "/veiculos/pesquisa/"];
+        } 
+        let cont = 1;
+    
+        btnMenu.addEventListener('click', function(){
+            nav.classList.toggle('mostrar');
+        });
+    
+        pathName.forEach(text => {
+            console.log(pathName)
+            console.log(window.location.pathname.includes(text))
+            if (window.location.pathname.includes(text)){
+                menu[cont].classList.add('select');
+                return;
+            }else if (cont === pathName.length){
+                menu[0].classList.add('select');
+            }
+            cont++;
+        })
+    })()
+</script>
 {% block script %}{% endblock script %}

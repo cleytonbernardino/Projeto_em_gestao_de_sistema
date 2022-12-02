@@ -4,7 +4,7 @@
 	<div class="verification-container destaque">
 		<div class="verification-content">
 			<div class="verification-text">
-				<div>Deseja mesmo excluir esse usuario? Essa operação é irreversível.</div>
+				<div>Deseja mesmo excluir esse usuário? Essa operação é irreversível.</div>
 			</div>
 			<form action="{% url 'users:delete' user.pk %}" class="form-choice" method="POST">
 				{% csrf_token %}

@@ -11,9 +11,8 @@ from .models import Vehicle, VehicleHistoric
 
 def vehicles(request):
     access_level = request.session.get('access_level', 0)
-    if access_level == 0:
-        messages.error(request, 'Você deve está logado para poder fazer isso')
-        return redirect('users:login')
+    if access_level != 2:
+        return HttpResponseForbidden()
 
     firm = request.session.get('firm', {'name': 'erro', 'id': 0})
     search = request.GET.get('pesquisa', None)
@@ -37,9 +36,8 @@ def vehicles(request):
 
 def complete_vehicle(request, license_plate: str):
     access_level = request.session.get('access_level', 0)
-    if access_level == 0:
-        messages.error(request, 'Você deve está logado para poder fazer isso')
-        return redirect('users:login')
+    if access_level != 2:
+        return HttpResponseForbidden()
 
     firm = request.session.get('firm', {'name': 'erro', 'id': 0})
     vehicle = ult.get_vehicle(firm['id'], license_plate)
@@ -120,7 +118,7 @@ def edit_vehicle(request, license_plate: str):
 def edit_vehicle_auth(request, license_plate: str):
     POST = request.POST
     if not POST:
-        raise HttpResponseForbidden()
+        raise Http404
 
     firm = request.session.get('firm', {'name': 'erro', 'id': 0})
     vehicle = ult.get_vehicle(firm['id'], license_plate)
@@ -176,7 +174,7 @@ def save_coordinates(request):
 
 def historic(request, license_plate: str):
     access_level = request.session.get('access_level', 0)
-    if access_level == 0:
+    if access_level != 2:
         raise HttpResponseForbidden()
 
     firm = request.session.get('firm', {'name': 'erro', 'id': 0})
